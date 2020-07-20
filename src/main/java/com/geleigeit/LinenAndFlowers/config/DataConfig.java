@@ -1,6 +1,8 @@
 package com.geleigeit.LinenAndFlowers.config;
 
+import com.geleigeit.LinenAndFlowers.repository.ColourRepository;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.geleigeit.LinenAndFlowers")
-@EnableJpaRepositories("com.geleigeit.LinenAndFlowers.repositories")
+@EnableJpaRepositories("com.geleigeit.LinenAndFlowers.repository")
 public class DataConfig {
 
         @Bean

@@ -1,16 +1,14 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "colours")
 public class Colour {
 
-    private long id;
+    private Long id;
     private String colour;
-    private Set<Fabric> fabrics = new HashSet<>();
+//    private Set<Fabric> fabrics = new HashSet<>();
 
     public Colour() {
     }
@@ -27,10 +25,10 @@ public class Colour {
         return colour;
     }
 
-    @OneToMany(mappedBy = "colour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<Fabric> getFabrics() {
-        return fabrics;
-    }
+//    @OneToMany(mappedBy = "colour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    public Set<Fabric> getFabrics() {
+//        return fabrics;
+//    }
 
     public void setId(long id) {
         this.id = id;
@@ -40,12 +38,12 @@ public class Colour {
         this.colour = colour;
     }
 
-    public void setFabrics(Set<Fabric> fabrics) {
-        this.fabrics = fabrics;
-    }
+//    public void setFabrics(Set<Fabric> fabrics) {
+//        this.fabrics = fabrics;
+//    }
 
-    @Override
-    public String toString() {
-        return "id=" + id + ", fabrics=" + fabrics;
-    }
+//    @Override
+//    public String toString() {
+//        return "id=" + id + ", fabrics=" + fabrics;
+//    }
 }

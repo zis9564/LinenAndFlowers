@@ -1,11 +1,12 @@
 package com.geleigeit.LinenAndFlowers;
 
-import com.geleigeit.LinenAndFlowers.config.DataConfig;
-import com.geleigeit.LinenAndFlowers.entity.util.ColourUtil;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+@EnableAutoConfiguration
 @SpringBootApplication
 public class EtsyToDoApplication {
 
