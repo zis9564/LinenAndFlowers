@@ -6,8 +6,11 @@ import javax.persistence.*;
 @Table(name = "colours")
 public class Colour {
 
-    private Long id;
+
+    private long id;
+
     private String colour;
+
 //    private Set<Fabric> fabrics = new HashSet<>();
 
     public Colour() {
