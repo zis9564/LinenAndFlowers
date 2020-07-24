@@ -1,24 +1,22 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "colours")
 public class Colour {
 
-
     private long id;
-
     private String colour;
-
-//    private Set<Fabric> fabrics = new HashSet<>();
+    private Boolean exist = true;
 
     public Colour() {
     }
 
     @Id
-    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
     public long getId() {
         return id;
     }
@@ -28,10 +26,10 @@ public class Colour {
         return colour;
     }
 
-//    @OneToMany(mappedBy = "colour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    public Set<Fabric> getFabrics() {
-//        return fabrics;
-//    }
+    @Column(name = "exist")
+    public Boolean getExist() {
+        return exist;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -41,12 +39,17 @@ public class Colour {
         this.colour = colour;
     }
 
-//    public void setFabrics(Set<Fabric> fabrics) {
+    public void setExist(Boolean exist) {
+        exist = exist;
+    }
+
+    //    public void setFabrics(Set<Fabric> fabrics) {
 //        this.fabrics = fabrics;
 //    }
 
-//    @Override
-//    public String toString() {
-//        return "id=" + id + ", fabrics=" + fabrics;
-//    }
+
+    @Override
+    public String toString() {
+        return "id= " + id + ", colour= '" + colour + '\'' + ", exist= " + exist;
+    }
 }
