@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ColourRepository extends CrudRepository<Colour, Long> {
 
@@ -18,4 +20,6 @@ public interface ColourRepository extends CrudRepository<Colour, Long> {
     @Query("update Colour c set c.colour = :name where c.id = :id")
     public void updateColour(@Param("name") String name,
                       @Param("id") long id);
+
+    public List<Colour> findAllByExistTrue();
 }

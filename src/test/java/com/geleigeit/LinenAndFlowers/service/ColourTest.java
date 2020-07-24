@@ -48,6 +48,6 @@ public class ColourTest {
 
     @Test
     public void getAllTest() {
-
+        System.out.println(colourServiceImpl.getAll().toString());
     }
 }

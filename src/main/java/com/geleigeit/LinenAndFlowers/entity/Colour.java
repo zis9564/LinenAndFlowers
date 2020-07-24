@@ -1,7 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "colours")
@@ -40,13 +40,23 @@ public class Colour {
     }
 
     public void setExist(Boolean exist) {
-        exist = exist;
+        this.exist = exist;
     }
 
-    //    public void setFabrics(Set<Fabric> fabrics) {
-//        this.fabrics = fabrics;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Colour colour1 = (Colour) o;
+        return id == colour1.id &&
+                Objects.equals(colour, colour1.colour) &&
+                Objects.equals(exist, colour1.exist);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, colour, exist);
+    }
 
     @Override
     public String toString() {

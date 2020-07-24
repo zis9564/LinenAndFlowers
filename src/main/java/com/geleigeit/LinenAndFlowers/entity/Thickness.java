@@ -4,15 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "types")
-public class Type {
+@Table(name = "thickness")
+public class Thickness {
 
     private long id;
-    private String type;
+    private int thickness;
     private Boolean exist = true;
 
-    public Type() {
-    }
+    public Thickness() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +20,9 @@ public class Type {
         return id;
     }
 
-    @Column(name = "type", unique = true)
-    public String getType() {
-        return type;
+    @Column(name = "thickness", unique = true)
+    public int getThickness() {
+        return thickness;
     }
 
     @Column(name = "exist")
@@ -35,8 +34,8 @@ public class Type {
         this.id = id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     public void setExist(Boolean exist) {
@@ -47,19 +46,19 @@ public class Type {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Type type1 = (Type) o;
-        return id == type1.id &&
-                Objects.equals(type, type1.type) &&
-                Objects.equals(exist, type1.exist);
+        Thickness thickness1 = (Thickness) o;
+        return id == thickness1.id &&
+                thickness == thickness1.thickness &&
+                Objects.equals(exist, thickness1.exist);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, exist);
+        return Objects.hash(id, thickness, exist);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", type= '" + type + '\'' + ", exist= " + exist;
+        return "id= " + id + ", thickness= " + thickness + ", exist= " + exist;
     }
 }
