@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
+import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.entity.Type;
 import com.geleigeit.LinenAndFlowers.repository.TypeRepository;
 import com.geleigeit.LinenAndFlowers.service.TypeService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,14 @@ public class TypeServiceImpl implements TypeService {
     @Transactional
     public void addType(Type type) {
         typeRepository.save(type);
+    }
+
+    @Override
+    public void addFabric(long id, Fabric fabric) {
+        Type type = getOne(id);
+        List<Fabric> fabrics = new ArrayList<>();
+        fabrics.add(fabric);
+        type.setFabrics(fabrics);
     }
 
     @Override

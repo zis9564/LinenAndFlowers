@@ -1,6 +1,8 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +12,7 @@ public class Thickness {
     private long id;
     private int thickness;
     private Boolean exist = true;
+    private List<Fabric> fabrics = new ArrayList<>();
 
     public Thickness() {}
 
@@ -30,6 +33,11 @@ public class Thickness {
         return exist;
     }
 
+    @OneToMany(mappedBy = "colour", cascade = CascadeType.REFRESH)
+    public List<Fabric> getFabrics() {
+        return fabrics;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -40,6 +48,10 @@ public class Thickness {
 
     public void setExist(Boolean exist) {
         this.exist = exist;
+    }
+
+    public void setFabrics(List<Fabric> fabrics) {
+        this.fabrics = fabrics;
     }
 
     @Override

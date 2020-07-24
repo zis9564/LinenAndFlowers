@@ -1,6 +1,8 @@
 package com.geleigeit.LinenAndFlowers.service;
 
 import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
+
 import java.util.List;
 
 public interface ColourService {

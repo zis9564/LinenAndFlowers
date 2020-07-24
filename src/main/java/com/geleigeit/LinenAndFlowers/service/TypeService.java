@@ -1,5 +1,6 @@
 package com.geleigeit.LinenAndFlowers.service;
 
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.entity.Type;
 import java.util.List;
 

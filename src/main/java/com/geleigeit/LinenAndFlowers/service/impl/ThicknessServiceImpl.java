@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
+import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
 import com.geleigeit.LinenAndFlowers.repository.ThicknessRepository;
 import com.geleigeit.LinenAndFlowers.service.ThicknessService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,14 @@ public class ThicknessServiceImpl implements ThicknessService{
     @Transactional
     public void addThickness(Thickness thickness) {
         thicknessRepository.save(thickness);
+    }
+
+    @Override
+    public void addFabric(long id, Fabric fabric) {
+        Thickness thickness = getOne(id);
+        List<Fabric> fabrics = new ArrayList<>();
+        fabrics.add(fabric);
+        thickness.setFabrics(fabrics);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.repository.ColourRepository;
 import com.geleigeit.LinenAndFlowers.service.ColourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,16 @@ public class ColourServiceImpl implements ColourService {
     @Transactional
     public void addColour(Colour colour) {
         colourRepository.save(colour);
+    }
+
+    //???
+    @Override
+    @Transactional
+    public void addFabric(long id, Fabric fabric) {
+        Colour colour = getOne(id);
+        List<Fabric> fabrics = new ArrayList<>();
+        fabrics.add(fabric);
+        colour.setFabrics(fabrics);
     }
 
     @Override
