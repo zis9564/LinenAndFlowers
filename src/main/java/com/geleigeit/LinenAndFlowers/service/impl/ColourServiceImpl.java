@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,26 +24,18 @@ public class ColourServiceImpl implements ColourService {
         colourRepository.save(colour);
     }
 
-    //???
-    @Override
-    @Transactional
-    public void addFabric(long id, Fabric fabric) {
-        Colour colour = getOne(id);
-        List<Fabric> fabrics = new ArrayList<>();
-        fabrics.add(fabric);
-        colour.setFabrics(fabrics);
-    }
-
     @Override
     @Transactional
     public void updateColour(String name, long id) {
-        colourRepository.updateColour(name, id);
+        Date update = new Date();
+        colourRepository.updateColour(name, update, id);
     }
 
     @Override
     @Transactional
     public void deleteColour(long id){
-        colourRepository.deleteColour(id);
+        Date delete = new Date();
+        colourRepository.deleteColour(delete, id);
     }
 
     @Override
@@ -63,6 +55,6 @@ public class ColourServiceImpl implements ColourService {
     @Override
     @Transactional
     public List<Colour> getAll() {
-        return colourRepository.findAllByExistTrue();
+        return colourRepository.findAllByDeletedAtIsNull();
     }
 }

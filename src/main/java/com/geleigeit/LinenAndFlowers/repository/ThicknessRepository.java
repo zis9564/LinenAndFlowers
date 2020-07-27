@@ -7,19 +7,22 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface ThicknessRepository extends CrudRepository<Thickness, Long> {
 
     @Modifying(flushAutomatically = true)
-    @Query("update Thickness t set t.exist = false where t.id = :id")
-    public void deleteThickness(@Param("id") long id);
+    @Query("update Thickness t set t.deletedAt = :delete where t.id = :id")
+    void deleteThickness(@Param("delete") Date delete,
+                                @Param("id") long id);
 
     @Modifying(flushAutomatically = true)
-    @Query("update Thickness t set t.thickness = :thickness where t.id = :id")
-    public void updateThickness(@Param("thickness") int thickness,
-                             @Param("id") long id);
+    @Query("update Thickness t set t.thickness = :thickness, t.updatedAt = :update where t.id = :id")
+    void updateThickness(@Param("thickness") int thickness,
+                                @Param("update") Date update,
+                                @Param("id") long id);
 
-    public List<Thickness> findAllByExistTrue();
+    List<Thickness> findAllByDeletedAtIsNull();
 }

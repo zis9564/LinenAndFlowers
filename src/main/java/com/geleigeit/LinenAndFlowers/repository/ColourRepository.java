@@ -7,19 +7,22 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface ColourRepository extends CrudRepository<Colour, Long> {
 
     @Modifying(flushAutomatically = true)
-    @Query("update Colour c set c.exist = false where c.id = :id")
-    public void deleteColour(@Param("id") long id);
-
-    @Modifying(flushAutomatically = true)
-    @Query("update Colour c set c.colour = :name where c.id = :id")
-    public void updateColour(@Param("name") String name,
+    @Query("update Colour c set c.deletedAt = :delete where c.id = :id")
+    void deleteColour(@Param("delete") Date delete,
                       @Param("id") long id);
 
-    public List<Colour> findAllByExistTrue();
+    @Modifying(flushAutomatically = true)
+    @Query("update Colour c set c.colour = :name, c.updatedAt = :update where c.id = :id")
+    void updateColour(@Param("name") String name,
+                      @Param("update") Date update,
+                      @Param("id") long id);
+
+    List<Colour> findAllByDeletedAtIsNull();
 }

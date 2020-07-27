@@ -27,12 +27,6 @@ public class TypeTest {
     }
 
     @Test
-    public void deleteTypeTest() {
-        long id = 1;
-        typeServiceImpl.deleteType(id);
-    }
-
-    @Test
     public void updateTypeTest() {
         String name = "silk";
         long id = 1;
@@ -49,5 +43,11 @@ public class TypeTest {
     @Test
     public void getAllTest() {
         System.out.println(typeServiceImpl.getAll().toString());
+    }
+
+    @Test
+    public void deleteTypeTest() {
+        long id = 1;
+        typeServiceImpl.deleteType(id);
     }
 }

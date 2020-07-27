@@ -27,12 +27,6 @@ public class ThicknessTest {
     }
 
     @Test
-    public void deleteThicknessTest() {
-        long id = 1;
-        thicknessService.deleteThickness(id);
-    }
-
-    @Test
     public void updateThicknessTest() {
         int thick = 200;
         long id = 1;
@@ -49,5 +43,11 @@ public class ThicknessTest {
     @Test
     public void getAllTest() {
         System.out.println(thicknessService.getAll().toString());
+    }
+
+    @Test
+    public void deleteThicknessTest() {
+        long id = 1;
+        thicknessService.deleteThickness(id);
     }
 }

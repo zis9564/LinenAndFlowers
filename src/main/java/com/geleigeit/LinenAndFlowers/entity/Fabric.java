@@ -1,6 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,13 +13,21 @@ public class Fabric {
     private Colour colour;
     private Type type;
     private Thickness thickness;
+    private Date createdAt;
+    private Date updatedAt = null;
+    private Date deletedAt = null;
 
     public Fabric() {
     }
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "fabric_id", unique = true, nullable = false)
     public long getId() {
         return id;
     }
@@ -28,22 +37,37 @@ public class Fabric {
         return length;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "colour_id", nullable = false)
     public Colour getColour() {
         return colour;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", nullable = false)
     public Type getType() {
         return type;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "thickness_id", nullable = false)
     public Thickness getThickness() {
         return thickness;
+    }
+
+    @Column(name = "created_at", nullable = false)
+    public Date getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Column(name = "updated_at")
+    public Date getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Column(name = "deleted_at")
+    public Date getDeletedAt() {
+        return this.deletedAt;
     }
 
     public void setId(long id) {
@@ -53,6 +77,17 @@ public class Fabric {
     public void setLength(int length) {
         this.length = length;
     }
+
+//    public void setColour(Colour colour) {
+//        setColour(colour, true);
+//    }
+//
+//    void setColour(Colour colour, Boolean add) {
+//        this.colour = colour;
+//        if(colour != null && add) {
+//            colour.addFabric(this, false);
+//        }
+//    }
 
     public void setColour(Colour colour) {
         this.colour = colour;
@@ -64,6 +99,18 @@ public class Fabric {
 
     public void setThickness(Thickness thickness) {
         this.thickness = thickness;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     @Override

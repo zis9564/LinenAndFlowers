@@ -1,6 +1,10 @@
 package com.geleigeit.LinenAndFlowers.service;
 
 import com.geleigeit.LinenAndFlowers.config.JpaConfig;
+import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
+import com.geleigeit.LinenAndFlowers.entity.Thickness;
+import com.geleigeit.LinenAndFlowers.entity.Type;
 import com.geleigeit.LinenAndFlowers.service.impl.FabricServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,5 +36,22 @@ public class FabricTest {
 
     @Test
     public void addFabricTest() {
+        long id = 1;
+
+        Fabric fabric = new Fabric();
+        Colour colour = new Colour();
+        Type type = new Type();
+        Thickness thickness = new Thickness();
+
+        colour.setId(id);
+        type.setId(id);
+        thickness.setId(id);
+
+        fabric.setColour(colour);
+        fabric.setType(type);
+        fabric.setThickness(thickness);
+
+        fabricService.addFabric(fabric);
     }
+
 }

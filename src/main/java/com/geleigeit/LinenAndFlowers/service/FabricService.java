@@ -7,7 +7,7 @@ public interface FabricService {
 
     void addFabric(Fabric fabric);
     void deleteFabric(long id);
-    void updateFabricLength(int newLength, long id);
+    void updateFabric(int newLength, long id);
     Fabric getOne(long id);
     List<Fabric> getAllFabrics();
 }

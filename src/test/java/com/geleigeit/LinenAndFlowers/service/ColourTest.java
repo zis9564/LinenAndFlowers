@@ -27,14 +27,8 @@ public class ColourTest {
     }
 
     @Test
-    public void deleteColourTest() {
-        long id = 1;
-        colourServiceImpl.deleteColour(id);
-    }
-
-    @Test
     public void updateColourTest() {
-        String name = "black";
+        String name = "yellow";
         long id = 1;
         colourServiceImpl.updateColour(name, id);
     }
@@ -49,5 +43,11 @@ public class ColourTest {
     @Test
     public void getAllTest() {
         System.out.println(colourServiceImpl.getAll().toString());
+    }
+
+    @Test
+    public void deleteColourTest() {
+        long id = 1;
+        colourServiceImpl.deleteColour(id);
     }
 }

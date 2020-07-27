@@ -29,7 +29,7 @@ public class FabricServiceImpl implements FabricService {
 
     @Override
     @Transactional
-    public void updateFabricLength(int newLength, long id) {
+    public void updateFabric(int newLength, long id) {
 
     }
 
