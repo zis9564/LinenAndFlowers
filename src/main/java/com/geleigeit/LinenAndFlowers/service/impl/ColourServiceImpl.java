@@ -1,7 +1,6 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Colour;
-import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.repository.ColourRepository;
 import com.geleigeit.LinenAndFlowers.service.ColourService;
 import org.springframework.beans.factory.annotation.Autowired;

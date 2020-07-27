@@ -12,7 +12,6 @@ public class Thickness {
 
     private long id;
     private int thickness;
-    private Boolean exist = true;
     private List<Fabric> fabrics = new ArrayList<>();
     private Date createdAt;
     private Date updatedAt = null;
@@ -35,11 +34,6 @@ public class Thickness {
     @Column(name = "thickness", unique = true)
     public int getThickness() {
         return thickness;
-    }
-
-    @Column(name = "exist")
-    public Boolean getExist() {
-        return exist;
     }
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.REFRESH)
@@ -70,10 +64,6 @@ public class Thickness {
         this.thickness = thickness;
     }
 
-    public void setExist(Boolean exist) {
-        this.exist = exist;
-    }
-
     public void setFabrics(List<Fabric> fabrics) {
         this.fabrics = fabrics;
     }
@@ -96,17 +86,16 @@ public class Thickness {
         if (o == null || getClass() != o.getClass()) return false;
         Thickness thickness1 = (Thickness) o;
         return id == thickness1.id &&
-                thickness == thickness1.thickness &&
-                Objects.equals(exist, thickness1.exist);
+                thickness == thickness1.thickness;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, thickness, exist);
+        return Objects.hash(id, thickness);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", thickness= " + thickness + ", exist= " + exist;
+        return "id= " + id + ", thickness= " + thickness;
     }
 }

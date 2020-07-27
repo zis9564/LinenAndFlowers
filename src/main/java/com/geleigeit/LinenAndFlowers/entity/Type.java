@@ -12,7 +12,6 @@ public class Type {
 
     private long id;
     private String type;
-    private Boolean exist = true;
     private List<Fabric> fabrics = new ArrayList<>();
     private Date createdAt;
     private Date updatedAt = null;
@@ -36,11 +35,6 @@ public class Type {
     @Column(name = "type", unique = true)
     public String getType() {
         return type;
-    }
-
-    @Column(name = "exist")
-    public Boolean getExist() {
-        return exist;
     }
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.REFRESH)
@@ -71,10 +65,6 @@ public class Type {
         this.type = type;
     }
 
-    public void setExist(Boolean exist) {
-        this.exist = exist;
-    }
-
     public void setFabrics(List<Fabric> fabrics) {
         this.fabrics = fabrics;
     }
@@ -97,17 +87,16 @@ public class Type {
         if (o == null || getClass() != o.getClass()) return false;
         Type type1 = (Type) o;
         return id == type1.id &&
-                Objects.equals(type, type1.type) &&
-                Objects.equals(exist, type1.exist);
+                Objects.equals(type, type1.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, exist);
+        return Objects.hash(id, type);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", type= '" + type + '\'' + ", exist= " + exist;
+        return "id= " + id + ", type= '" + type;
     }
 }
