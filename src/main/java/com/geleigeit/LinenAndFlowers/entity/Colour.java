@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,18 +28,20 @@ public class Colour {
     }
 
     @Id
+    @JsonView(View.idName.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "colour_id", nullable = false, unique = true)
     public long getId() {
         return id;
     }
 
+    @JsonView(View.idName.class)
     @Column(name = "colour", unique = true)
     public String getColour() {
         return colour;
     }
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     public List<Fabric> getFabrics() {
         return fabrics;
     }
@@ -56,29 +60,6 @@ public class Colour {
     public Date getDeletedAt() {
         return this.deletedAt;
     }
-
-//    public void addFabric(Fabric fabric) {
-//        addFabric(fabric, true);
-//    }
-//
-//    void addFabric(Fabric fabric, Boolean set) {
-//        if(fabric != null) {
-//            if(getFabrics().contains(fabric)) {
-//                getFabrics().set(getFabrics().indexOf(fabric), fabric);
-//            }
-//            else {
-//                getFabrics().add(fabric);
-//            }
-//            if(set) {
-//                fabric.setColour(this, false);
-//            }
-//        }
-//    }
-//
-//    public void removeFabric(Fabric fabric) {
-//        getFabrics().remove(fabric);
-//        fabric.setColour(null);
-//    }
 
     public void setId(long id) {
         this.id = id;
@@ -108,14 +89,13 @@ public class Colour {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Colour colour1 = (Colour) o;
-        return id == colour1.id &&
-                Objects.equals(colour, colour1.colour);
+        Colour colour = (Colour) o;
+        return id == colour.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, colour);
+        return Objects.hash(id);
     }
 
     @Override

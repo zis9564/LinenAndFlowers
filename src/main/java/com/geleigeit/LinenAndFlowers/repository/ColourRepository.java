@@ -22,7 +22,8 @@ public interface ColourRepository extends CrudRepository<Colour, Long> {
     @Query("update Colour c set c.colour = :name, c.updatedAt = :update where c.id = :id")
     void updateColour(@Param("name") String name,
                       @Param("update") Date update,
-                      @Param("id") long id);
+                      @Param("id") long id
+    );
 
     List<Colour> findAllByDeletedAtIsNull();
 }

@@ -14,8 +14,12 @@ import java.util.Optional;
 @Service
 public class ColourServiceImpl implements ColourService {
 
+    private final ColourRepository colourRepository;
+
     @Autowired
-    private ColourRepository colourRepository;
+    public ColourServiceImpl(ColourRepository colourRepository) {
+        this.colourRepository = colourRepository;
+    }
 
     @Override
     @Transactional
