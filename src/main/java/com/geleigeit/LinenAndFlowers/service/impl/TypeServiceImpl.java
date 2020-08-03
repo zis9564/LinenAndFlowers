@@ -14,8 +14,12 @@ import java.util.Optional;
 @Service
 public class TypeServiceImpl implements TypeService {
 
+    private final TypeRepository typeRepository;
+
     @Autowired
-    TypeRepository typeRepository;
+    public TypeServiceImpl(TypeRepository typeRepository) {
+        this.typeRepository = typeRepository;
+    }
 
     @Override
     @Transactional

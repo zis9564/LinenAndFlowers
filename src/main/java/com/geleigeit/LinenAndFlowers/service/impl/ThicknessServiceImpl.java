@@ -14,8 +14,12 @@ import java.util.Optional;
 @Service
 public class ThicknessServiceImpl implements ThicknessService{
 
+    private final ThicknessRepository thicknessRepository;
+
     @Autowired
-    ThicknessRepository thicknessRepository;
+    public ThicknessServiceImpl(ThicknessRepository thicknessRepository) {
+        this.thicknessRepository = thicknessRepository;
+    }
 
     @Override
     @Transactional

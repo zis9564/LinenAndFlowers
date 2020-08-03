@@ -15,7 +15,7 @@ public interface FabricRepository extends CrudRepository<Fabric, Long> {
 
     @Modifying(flushAutomatically = true)
     @Query("update Fabric f set f.deletedAt = :delete where f.id = :id")
-    void deleteFabric(@Param("delete") Date delete,
+    Fabric deleteFabric(@Param("delete") Date delete,
                       @Param("id") long id);
 
     @Modifying(flushAutomatically = true)

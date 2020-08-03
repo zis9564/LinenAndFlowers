@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -26,29 +28,34 @@ public class Fabric {
     }
 
     @Id
+    @JsonView(View.fullEntity.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fabric_id", unique = true, nullable = false)
     public long getId() {
         return id;
     }
 
+    @JsonView(View.fullEntity.class)
     @Column(name = "length", nullable = false)
     public int getLength() {
         return length;
     }
 
+    @JsonView(View.fullEntity.class)
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "colour_id", nullable = false)
     public Colour getColour() {
         return colour;
     }
 
+    @JsonView(View.fullEntity.class)
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", nullable = false)
     public Type getType() {
         return type;
     }
 
+    @JsonView(View.fullEntity.class)
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "thickness_id", nullable = false)
     public Thickness getThickness() {
@@ -77,17 +84,6 @@ public class Fabric {
     public void setLength(int length) {
         this.length = length;
     }
-
-//    public void setColour(Colour colour) {
-//        setColour(colour, true);
-//    }
-//
-//    void setColour(Colour colour, Boolean add) {
-//        this.colour = colour;
-//        if(colour != null && add) {
-//            colour.addFabric(this, false);
-//        }
-//    }
 
     public void setColour(Colour colour) {
         this.colour = colour;

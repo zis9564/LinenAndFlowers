@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +27,7 @@ public class Thickness {
     }
 
     @Id
+    @JsonView(View.idName.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "thickness_id", nullable = false, unique = true)
     public long getId() {
@@ -32,6 +35,7 @@ public class Thickness {
     }
 
     @Column(name = "thickness", unique = true)
+    @JsonView(View.idName.class)
     public int getThickness() {
         return thickness;
     }

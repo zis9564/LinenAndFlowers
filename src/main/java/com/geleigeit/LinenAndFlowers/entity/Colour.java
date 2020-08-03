@@ -35,8 +35,8 @@ public class Colour {
         return id;
     }
 
-    @JsonView(View.idName.class)
     @Column(name = "colour", unique = true)
+    @JsonView(View.idName.class)
     public String getColour() {
         return colour;
     }

@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class FabricServiceImpl implements FabricService {
 
+    private final FabricRepository fabricRepository;
+
     @Autowired
-    FabricRepository fabricRepository;
+    public FabricServiceImpl(FabricRepository fabricRepository) {
+        this.fabricRepository = fabricRepository;
+    }
 
     @Override
     @Transactional
@@ -23,8 +28,8 @@ public class FabricServiceImpl implements FabricService {
 
     @Override
     @Transactional
-    public void deleteFabric(long id) {
-
+    public Fabric deleteFabric(Date delete, long id) {
+        return fabricRepository.deleteFabric(delete, id);
     }
 
     @Override

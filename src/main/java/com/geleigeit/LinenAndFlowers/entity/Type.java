@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +28,7 @@ public class Type {
     }
 
     @Id
+    @JsonView(View.idName.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id", nullable = false, unique = true)
     public long getId() {
@@ -33,6 +36,7 @@ public class Type {
     }
 
     @Column(name = "type", unique = true)
+    @JsonView(View.idName.class)
     public String getType() {
         return type;
     }
