@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface ThicknessService {
 
-    void addThickness(Thickness thickness);
-    void deleteThickness(long id);
-    void updateThickness(int thickness, long id);
+    Thickness addThickness(Thickness thickness);
+    Thickness deleteThickness(long id);
+    Thickness updateThickness(Thickness newThickness);
     Thickness getOne(long id);
     List<Thickness> getAll();
 }

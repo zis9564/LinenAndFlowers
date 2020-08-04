@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface TypeService {
 
-    void addType(Type type);
-    void deleteType(long id);
-    void updateType(String name, long id);
+    Type addType(Type type);
+    Type deleteType(long id);
+    Type updateType(Type newType);
     Type getOne(long id);
     List<Type> getAll();
 }

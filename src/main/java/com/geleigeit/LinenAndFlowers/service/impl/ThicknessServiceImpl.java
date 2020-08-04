@@ -1,6 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
+import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.ThicknessRepository;
 import com.geleigeit.LinenAndFlowers.service.ThicknessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ThicknessServiceImpl implements ThicknessService{
@@ -23,41 +23,43 @@ public class ThicknessServiceImpl implements ThicknessService{
 
     @Override
     @Transactional
-    public void addThickness(Thickness thickness) {
-        thicknessRepository.save(thickness);
+    public Thickness addThickness(Thickness thickness) {
+        if(thickness == null || thickness.getThickness() == 0) throw  new NullPointerException();
+        return thicknessRepository.save(thickness);
     }
 
     @Override
     @Transactional
-    public void deleteThickness(long id) {
-        Date delete = new Date();
-        thicknessRepository.deleteThickness(delete, id);
+    public Thickness deleteThickness(long id) {
+        Thickness thickness = thicknessRepository.findById(id).orElseThrow(NotFoundException::new);
+        if(thickness.getDeletedAt() != null) throw new NotFoundException();
+        thickness.setDeletedAt(new Date());
+        return thicknessRepository.save(thickness);
     }
 
     @Override
     @Transactional
-    public void updateThickness(int thickness, long id) {
-        Date update = new Date();
-        thicknessRepository.updateThickness(thickness, update, id);
+    public Thickness updateThickness(Thickness newThickness) {
+        if(newThickness == null || newThickness.getThickness() == 0) throw new RuntimeException();
+        Thickness thickness = thicknessRepository.findById(newThickness.getId()).orElseThrow(NotFoundException::new);
+        if(thickness.getDeletedAt() != null) throw new NotFoundException();
+        thickness.setThickness(newThickness.getThickness());
+        thickness.setFabrics(newThickness.getFabrics());
+        thickness.setUpdatedAt(new Date());
+        return thicknessRepository.save(thickness);
     }
 
     @Override
     @Transactional
     public Thickness getOne(long id) {
-        Optional<Thickness> thickness = thicknessRepository.findById(id);
-        if(thickness.isPresent()) {
-            try {
-                return thickness.get();
-            } catch (NullPointerException e) {
-                System.out.println("thickness doesn't exist");
-            }
-        }
-        return null;
+        return thicknessRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @Override
     @Transactional
     public List<Thickness> getAll() {
-        return thicknessRepository.findAllByDeletedAtIsNull();
+        List<Thickness> thicknessList = thicknessRepository.findAllByDeletedAtIsNull();
+        if(thicknessList.isEmpty()) throw new NotFoundException();
+        return thicknessList;
     }
 }

@@ -6,46 +6,65 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ThicknessTest {
 
     @Autowired
-    ThicknessServiceImpl thicknessService;
+    ThicknessServiceImpl thicknessServiceImpl;
 
     @Test
     public void AddThicknessTest() {
-        Thickness thickness = new Thickness();
-        int thick = 100;
-        thickness.setThickness(thick);
-        thicknessService.addThickness(thickness);
+        Thickness expected = new Thickness();
+        expected.setThickness(20);
+        Thickness actual = thicknessServiceImpl.addThickness(expected);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void updateThicknessTest() {
-        int thick = 200;
         long id = 1;
-        thicknessService.updateThickness(thick, id);
+        Thickness expected = new Thickness();
+        expected.setId(id);
+        expected.setThickness(10);
+        Thickness actual = thicknessServiceImpl.updateThickness(expected);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getOneTest() {
         long id = 1;
-        Thickness thickness = thicknessService.getOne(id);
-        System.out.println(thickness.toString());
+        Thickness expected = new Thickness();
+        expected.setId(id);
+        expected.setThickness(10);
+        Thickness actual = thicknessServiceImpl.getOne(id);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getAllTest() {
-        System.out.println(thicknessService.getAll().toString());
+        long id = 1;
+        Thickness expected = new Thickness();
+        expected.setId(id);
+        expected.setThickness(10);
+        List<Thickness> expectedList = new ArrayList<>();
+        expectedList.add(expected);
+        List<Thickness> actualList = thicknessServiceImpl.getAll();
+        assertEquals(expectedList, actualList);
     }
 
     @Test
     public void deleteThicknessTest() {
         long id = 1;
-        thicknessService.deleteThickness(id);
+        Thickness actual = thicknessServiceImpl.deleteThickness(id);
+        assertNotNull(actual.getDeletedAt());
     }
 }

@@ -1,6 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Fabric;
+import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.FabricRepository;
 import com.geleigeit.LinenAndFlowers.service.FabricService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,31 +23,53 @@ public class FabricServiceImpl implements FabricService {
 
     @Override
     @Transactional
-    public void addFabric(Fabric fabric) {
-        fabricRepository.save(fabric);
+    public Fabric addFabric(Fabric fabric) {
+        if(fabric == null
+                || fabric.getColour() == null
+                || fabric.getType() == null
+                || fabric.getThickness() == null
+        ) throw new RuntimeException();
+        return fabricRepository.save(fabric);
     }
 
     @Override
     @Transactional
-    public Fabric deleteFabric(Date delete, long id) {
-        return fabricRepository.deleteFabric(delete, id);
+    public Fabric deleteFabric(long id) {
+        Fabric fabric = fabricRepository.findById(id).orElseThrow(NotFoundException::new);
+        if(fabric.getDeletedAt() != null) throw new NotFoundException();
+        fabric.setDeletedAt(new Date());
+        return fabricRepository.save(fabric);
     }
 
     @Override
     @Transactional
-    public void updateFabric(int newLength, long id) {
-
+    public Fabric updateFabric(Fabric newFabric) {
+        if(newFabric == null
+                || newFabric.getColour() == null
+                || newFabric.getType() == null
+                || newFabric.getThickness() == null
+        ) throw new RuntimeException();
+        Fabric fabric = fabricRepository.findById(newFabric.getId()).orElseThrow(NotFoundException::new);
+        if(fabric.getDeletedAt() != null) throw new NotFoundException();
+        fabric.setLength(newFabric.getLength());
+        fabric.setColour(newFabric.getColour());
+        fabric.setType(newFabric.getType());
+        fabric.setThickness(newFabric.getThickness());
+        fabric.setUpdatedAt(new Date());
+        return fabricRepository.save(fabric);
     }
 
     @Override
     @Transactional
     public Fabric getOne(long id) {
-        return null;
+       return fabricRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @Override
     @Transactional
     public List<Fabric> getAllFabrics() {
-        return null;
+        List<Fabric> fabricList = fabricRepository.findAllByDeletedAtIsNull();
+        if(fabricList.isEmpty()) throw new NotFoundException();
+        return fabricList;
     }
 }

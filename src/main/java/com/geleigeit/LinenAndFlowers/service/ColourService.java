@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface ColourService {
 
-    void addColour(Colour colour);
-    void deleteColour(long id);
-    void updateColour(String name, long id);
+    Colour addColour(Colour colour);
+    Colour deleteColour(long id);
+    Colour updateColour(Colour newColour);
     Colour getOne(long id);
     List<Colour> getAll();
 }
