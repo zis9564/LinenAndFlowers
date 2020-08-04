@@ -1,23 +1,35 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "fabrics")
-public class Fabric {
+public class Fabric extends BaseEntity{
 
-    private long id;
+    @Column(name = "length", nullable = false)
     private int length;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "colour_id", nullable = false)
     private Colour colour;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_id", nullable = false)
     private Type type;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "thickness_id", nullable = false)
     private Thickness thickness;
+
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+
+    @Column(name = "updated_at")
     private Date updatedAt = null;
+
+    @Column(name = "deleted_at")
     private Date deletedAt = null;
 
     public Fabric() {
@@ -29,61 +41,32 @@ public class Fabric {
         createdAt = new Date();
     }
 
-    @Id
-    @JsonView(View.fullEntity.class)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "fabric_id", unique = true, nullable = false)
-    public long getId() {
-        return id;
-    }
-
-    @JsonView(View.fullEntity.class)
-    @Column(name = "length", nullable = false)
     public int getLength() {
         return length;
     }
 
-    @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "colour_id", nullable = false)
     public Colour getColour() {
         return colour;
     }
 
-    @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "type_id", nullable = false)
     public Type getType() {
         return type;
     }
 
-    @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "thickness_id", nullable = false)
     public Thickness getThickness() {
         return thickness;
     }
 
-    @Column(name = "created_at", nullable = false)
-    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    @Column(name = "updated_at")
-    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
-    @Column(name = "deleted_at")
-    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setLength(int length) {
@@ -119,19 +102,30 @@ public class Fabric {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fabric fabric = (Fabric) o;
-        return id == fabric.id &&
+        return length == fabric.length &&
                 Objects.equals(colour, fabric.colour) &&
                 Objects.equals(type, fabric.type) &&
-                Objects.equals(thickness, fabric.thickness);
+                Objects.equals(thickness, fabric.thickness) &&
+                Objects.equals(createdAt, fabric.createdAt) &&
+                Objects.equals(updatedAt, fabric.updatedAt) &&
+                Objects.equals(deletedAt, fabric.deletedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, colour, type, thickness);
+        return Objects.hash(length, colour, type, thickness, createdAt, updatedAt, deletedAt);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", colour= " + colour + ", type =" + type + ", thickness =" + thickness;
+        return "Fabric{" +
+                "length=" + length +
+                ", colour=" + colour +
+                ", type=" + type +
+                ", thickness=" + thickness +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }

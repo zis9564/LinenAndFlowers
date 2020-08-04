@@ -1,8 +1,5 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +8,21 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "colours")
-public class Colour {
+public class Colour extends BaseEntity{
 
-    private long id;
+    @Column(name = "colour", unique = true)
     private String colour;
+
+    @OneToMany(mappedBy = "colour", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
     private List<Fabric> fabrics = new ArrayList<>();
+
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+
+    @Column(name = "updated_at")
     private Date updatedAt = null;
+
+    @Column(name = "deleted_at")
     private Date deletedAt = null;
 
     public Colour() {
@@ -28,46 +33,24 @@ public class Colour {
         createdAt = new Date();
     }
 
-    @Id
-    @JsonView(View.idName.class)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "colour_id", nullable = false, unique = true)
-    public long getId() {
-        return id;
-    }
-
-    @Column(name = "colour", unique = true)
-    @JsonView(View.idName.class)
     public String getColour() {
         return colour;
     }
 
-    @OneToMany(mappedBy = "colour", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
-    @JsonIgnore
     public List<Fabric> getFabrics() {
         return fabrics;
     }
 
-    @Column(name = "created_at", nullable = false)
-    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    @Column(name = "updated_at")
-    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
-    @Column(name = "deleted_at")
-    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setColour(String colour) {
@@ -94,17 +77,27 @@ public class Colour {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Colour colour = (Colour) o;
-        return id == colour.id;
+        Colour colour1 = (Colour) o;
+        return Objects.equals(colour, colour1.colour) &&
+                Objects.equals(fabrics, colour1.fabrics) &&
+                Objects.equals(createdAt, colour1.createdAt) &&
+                Objects.equals(updatedAt, colour1.updatedAt) &&
+                Objects.equals(deletedAt, colour1.deletedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(colour, fabrics, createdAt, updatedAt, deletedAt);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", colour= '" + colour + '\'';
+        return "Colour{" +
+                "colour='" + colour + '\'' +
+                ", fabrics=" + fabrics +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }

@@ -1,8 +1,5 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +8,21 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "types")
-public class Type {
+public class Type extends BaseEntity{
 
-    private long id;
+    @Column(name = "type", unique = true)
     private String type;
+
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
     private List<Fabric> fabrics = new ArrayList<>();
+
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+
+    @Column(name = "updated_at")
     private Date updatedAt = null;
+
+    @Column(name = "deleted_at")
     private Date deletedAt = null;
 
     public Type() {
@@ -28,46 +33,24 @@ public class Type {
         createdAt = new Date();
     }
 
-    @Id
-    @JsonView(View.idName.class)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "type_id", nullable = false, unique = true)
-    public long getId() {
-        return id;
-    }
-
-    @Column(name = "type", unique = true)
-    @JsonView(View.idName.class)
     public String getType() {
         return type;
     }
 
-    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
-    @JsonIgnore
     public List<Fabric> getFabrics() {
         return fabrics;
     }
 
-    @Column(name = "created_at", nullable = false)
-    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    @Column(name = "updated_at")
-    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
-    @Column(name = "deleted_at")
-    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setType(String type) {
@@ -95,17 +78,26 @@ public class Type {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Type type1 = (Type) o;
-        return id == type1.id &&
-                Objects.equals(type, type1.type);
+        return Objects.equals(type, type1.type) &&
+                Objects.equals(fabrics, type1.fabrics) &&
+                Objects.equals(createdAt, type1.createdAt) &&
+                Objects.equals(updatedAt, type1.updatedAt) &&
+                Objects.equals(deletedAt, type1.deletedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type);
+        return Objects.hash(type, fabrics, createdAt, updatedAt, deletedAt);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", type= '" + type;
+        return "Type{" +
+                "type='" + type + '\'' +
+                ", fabrics=" + fabrics +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }

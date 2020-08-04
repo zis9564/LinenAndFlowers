@@ -1,6 +1,5 @@
 package com.geleigeit.LinenAndFlowers.service;
 
-import com.geleigeit.LinenAndFlowers.config.JpaConfig;
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
 import com.geleigeit.LinenAndFlowers.service.impl.ThicknessServiceImpl;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = JpaConfig.class)
 public class ThicknessTest {
 
     @Autowired

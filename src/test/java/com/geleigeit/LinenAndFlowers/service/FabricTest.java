@@ -1,6 +1,5 @@
 package com.geleigeit.LinenAndFlowers.service;
 
-import com.geleigeit.LinenAndFlowers.config.JpaConfig;
 import com.geleigeit.LinenAndFlowers.entity.Colour;
 import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
@@ -19,7 +18,6 @@ import javax.persistence.EntityManagerFactory;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = JpaConfig.class)
 public class FabricTest {
 
     @Resource

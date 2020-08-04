@@ -1,8 +1,5 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +8,21 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "thickness")
-public class Thickness {
+public class Thickness extends BaseEntity{
 
-    private long id;
+    @Column(name = "thickness", unique = true)
     private int thickness;
+
+    @OneToMany(mappedBy = "thickness", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
     private List<Fabric> fabrics = new ArrayList<>();
+
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+
+    @Column(name = "updated_at")
     private Date updatedAt = null;
+
+    @Column(name = "deleted_at")
     private Date deletedAt = null;
 
     public Thickness() {}
@@ -27,46 +32,25 @@ public class Thickness {
         createdAt = new Date();
     }
 
-    @Id
-    @JsonView(View.idName.class)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "thickness_id", nullable = false, unique = true)
-    public long getId() {
-        return id;
-    }
 
-    @Column(name = "thickness", unique = true)
-    @JsonView(View.idName.class)
     public int getThickness() {
         return thickness;
     }
 
-    @OneToMany(mappedBy = "thickness", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
-    @JsonIgnore
     public List<Fabric> getFabrics() {
         return fabrics;
     }
 
-    @Column(name = "created_at", nullable = false)
-    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    @Column(name = "updated_at")
-    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
-    @Column(name = "deleted_at")
-    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setThickness(int thickness) {
@@ -94,17 +78,26 @@ public class Thickness {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Thickness thickness1 = (Thickness) o;
-        return id == thickness1.id &&
-                thickness == thickness1.thickness;
+        return thickness == thickness1.thickness &&
+                Objects.equals(fabrics, thickness1.fabrics) &&
+                Objects.equals(createdAt, thickness1.createdAt) &&
+                Objects.equals(updatedAt, thickness1.updatedAt) &&
+                Objects.equals(deletedAt, thickness1.deletedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, thickness);
+        return Objects.hash(thickness, fabrics, createdAt, updatedAt, deletedAt);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", thickness= " + thickness;
+        return "Thickness{" +
+                "thickness=" + thickness +
+                ", fabrics=" + fabrics +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }
