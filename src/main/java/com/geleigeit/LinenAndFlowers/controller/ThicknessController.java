@@ -1,11 +1,12 @@
 package com.geleigeit.LinenAndFlowers.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
-import com.geleigeit.LinenAndFlowers.entity.View;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.ThicknessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -22,45 +23,48 @@ public class ThicknessController {
         this.thicknessRepository = thicknessRepository;
     }
 
-    @GetMapping
-    @JsonView(View.idName.class)
-    public List<Thickness> getAll() {
-        return thicknessRepository.findAllByDeletedAtIsNull();
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Thickness>> getAll() {
+        List<Thickness> thicknessList = thicknessRepository.findAllByDeletedAtIsNull();
+        if(thicknessList.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(thicknessList, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    @JsonView(View.idName.class)
-    public Thickness getOne(@PathVariable Long id) {
-        return thicknessRepository.findById(id).orElseThrow(NotFoundException::new);
+    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Thickness> getOne(@PathVariable("id") Long id) {
+        if(id == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Thickness thickness = thicknessRepository.findById(id).orElseThrow(NotFoundException::new);
+        if(thickness.getDeletedAt() != null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(thickness, HttpStatus.OK);
     }
 
-    @PostMapping
-    public Thickness add(@RequestParam int thick) {
-        Thickness thickness = new Thickness();
-        thickness.setThickness(thick);
-        return thicknessRepository.save(thickness);
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Thickness> add(@RequestBody Thickness thickness) {
+        if (thickness == null || thickness.getDeletedAt() != null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        thicknessRepository.save(thickness);
+        return new ResponseEntity<>(thickness, HttpStatus.OK);
     }
 
-    @PutMapping("{id}")
-    public Thickness update(@RequestBody Thickness newThickness, @PathVariable Long id) {
+    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Thickness> update(@RequestBody Thickness newThickness) {
         Date update = new Date();
-        return thicknessRepository.findById(id)
-                .map(thickness -> {
-                    thickness.setThickness(newThickness.getThickness());
-                    thickness.setUpdatedAt(update);
-                    return thicknessRepository.save(thickness);
-                })
-                .orElseThrow(NotFoundException::new);
+        if(newThickness == null || newThickness.getDeletedAt() != null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Thickness thickness = this.thicknessRepository.findById(newThickness.getId()).orElseThrow(NotFoundException::new);
+        if(thickness.getDeletedAt() != null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        thickness.setThickness(newThickness.getThickness());
+        thickness.setUpdatedAt(update);
+        this.thicknessRepository.save(thickness);
+        return new ResponseEntity<>(thickness, HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
-    public Thickness delete(@PathVariable Long id) {
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Thickness> delete(@PathVariable("id") Long id) {
         Date delete = new Date();
-        return thicknessRepository.findById(id)
-                .map(thickness -> {
-                    thickness.setDeletedAt(delete);
-                    return thicknessRepository.save(thickness);
-                })
-                .orElseThrow(NotFoundException::new);
+        if(id == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Thickness thickness = thicknessRepository.findById(id).orElseThrow(NotFoundException::new);
+        if(thickness.getDeletedAt() != null) return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        thickness.setDeletedAt(delete);
+        this.thicknessRepository.save(thickness);
+        return new ResponseEntity<>(thickness, HttpStatus.NO_CONTENT);
     }
 }

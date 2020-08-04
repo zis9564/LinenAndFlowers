@@ -1,5 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Fabric {
     private Date deletedAt = null;
 
     public Fabric() {
+        super();
     }
 
     @PrePersist
@@ -29,7 +31,7 @@ public class Fabric {
 
     @Id
     @JsonView(View.fullEntity.class)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "fabric_id", unique = true, nullable = false)
     public long getId() {
         return id;
@@ -42,37 +44,40 @@ public class Fabric {
     }
 
     @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "colour_id", nullable = false)
     public Colour getColour() {
         return colour;
     }
 
     @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id", nullable = false)
     public Type getType() {
         return type;
     }
 
     @JsonView(View.fullEntity.class)
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "thickness_id", nullable = false)
     public Thickness getThickness() {
         return thickness;
     }
 
     @Column(name = "created_at", nullable = false)
+    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
     @Column(name = "updated_at")
+    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
     }

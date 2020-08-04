@@ -1,5 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Type {
 
     @Id
     @JsonView(View.idName.class)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "type_id", nullable = false, unique = true)
     public long getId() {
         return id;
@@ -41,22 +42,26 @@ public class Type {
         return type;
     }
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH) //id
+    @JsonIgnore
     public List<Fabric> getFabrics() {
         return fabrics;
     }
 
     @Column(name = "created_at", nullable = false)
+    @JsonIgnore
     public Date getCreatedAt() {
         return this.createdAt;
     }
 
     @Column(name = "updated_at")
+    @JsonIgnore
     public Date getUpdatedAt() {
         return this.updatedAt;
     }
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     public Date getDeletedAt() {
         return this.deletedAt;
     }
