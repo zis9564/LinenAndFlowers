@@ -3,6 +3,8 @@ package com.geleigeit.LinenAndFlowers.controller;
 import com.geleigeit.LinenAndFlowers.entity.Colour;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.ColourRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("colour")
 public class ColourController {
 
+    static final Logger logger = LogManager.getLogger(ColourController.class);
     private final ColourRepository colourRepository;
 
     @Autowired
@@ -34,7 +37,10 @@ public class ColourController {
     public ResponseEntity<Colour> getOne(@PathVariable("id") Long id) {
         if(id == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         Colour colour = colourRepository.findById(id).orElseThrow(NotFoundException::new);
-        if(colour.getDeletedAt() != null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if(colour.getDeletedAt() != null) {
+            logger.error("Colour doesn't exist Colour: " + colour);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(colour, HttpStatus.OK);
     }
 
