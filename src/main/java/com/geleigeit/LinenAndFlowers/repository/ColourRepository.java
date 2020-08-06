@@ -1,6 +1,7 @@
 package com.geleigeit.LinenAndFlowers.repository;
 
 import com.geleigeit.LinenAndFlowers.entity.Colour;
+import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,8 +20,9 @@ public interface ColourRepository extends CrudRepository<Colour, Long> {
                       @Param("id") long id);
 
     @Modifying(flushAutomatically = true)
-    @Query("update Colour c set c.colour = :name, c.updatedAt = :update where c.id = :id")
+    @Query("update Colour c set c.colour = :name, c.fabrics = :fabrics, c.updatedAt = :update where c.id = :id")
     void updateColour(@Param("name") String name,
+                      @Param("fabrics") List<Fabric> fabrics,
                       @Param("update") Date update,
                       @Param("id") long id
     );

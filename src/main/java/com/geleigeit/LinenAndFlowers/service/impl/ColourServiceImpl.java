@@ -23,9 +23,9 @@ public class ColourServiceImpl implements ColourService {
 
     @Override
     @Transactional
-    public Colour addColour(Colour colour) {
-        if(colour == null || colour.getColour() == null) throw new RuntimeException();
-        return colourRepository.save(colour);
+    public void addColour(Colour colour) {
+        if(colour.getDeletedAt() != null) throw new NotFoundException();
+        colourRepository.save(colour);
     }
 
     @Override
@@ -40,9 +40,9 @@ public class ColourServiceImpl implements ColourService {
     @Override
     @Transactional
     public Colour updateColour(Colour newColour) {
-        if(newColour.getColour() == null) throw new RuntimeException();
-        Colour colour = colourRepository.findById(newColour.getId()).orElseThrow(NotFoundException::new);
-        if(colour.getDeletedAt() != null) throw new NotFoundException();
+        Colour colour = getOne(newColour.getId());
+        if(newColour.getColour() == null || colour.getDeletedAt() != null) throw new NotFoundException();
+
         colour.setColour(newColour.getColour());
         colour.setFabrics(newColour.getFabrics());
         colour.setUpdatedAt(new Date());
@@ -59,7 +59,9 @@ public class ColourServiceImpl implements ColourService {
     @Transactional
     public List<Colour> getAll() {
         List<Colour> colourList = colourRepository.findAllByDeletedAtIsNull();
-        if(colourList.isEmpty()) throw new NotFoundException();
+        if(colourList.isEmpty()) {
+            throw new NotFoundException();
+        }
         return colourList;
     }
 }

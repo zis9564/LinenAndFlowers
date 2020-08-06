@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ColourService {
 
-    Colour addColour(Colour colour);
+    void addColour(Colour colour);
     Colour deleteColour(long id);
     Colour updateColour(Colour newColour);
     Colour getOne(long id);
