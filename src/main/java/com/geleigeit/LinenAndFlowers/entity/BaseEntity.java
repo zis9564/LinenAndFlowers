@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,22 +12,17 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JsonIgnore
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
+    @JsonIgnore
     @Column(name = "updated_at")
     private Date updatedAt = null;
 
+    @JsonIgnore
     @Column(name = "deleted_at")
     private Date deletedAt = null;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public BaseEntity() {
     }
@@ -33,6 +30,14 @@ public class BaseEntity {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getCreatedAt() {
@@ -57,12 +62,5 @@ public class BaseEntity {
 
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseEntity{" +
-                "id=" + id +
-                '}';
     }
 }

@@ -1,25 +1,30 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "fabrics")
-public class Fabric extends BaseEntity{
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Fabric extends BaseEntity {
 
     @Column(name = "length", nullable = false)
     private int length;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "colour_id", nullable = false)
+//    @JsonManagedReference
     private Colour colour;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "type_id", nullable = false)
+//    @JsonManagedReference
     private Type type;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "thickness_id", nullable = false)
+//    @JsonManagedReference
     private Thickness thickness;
 
     public Fabric() {
@@ -56,26 +61,5 @@ public class Fabric extends BaseEntity{
 
     public void setThickness(Thickness thickness) {
         this.thickness = thickness;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Fabric fabric = (Fabric) o;
-        return length == fabric.length &&
-                Objects.equals(colour, fabric.colour) &&
-                Objects.equals(type, fabric.type) &&
-                Objects.equals(thickness, fabric.thickness);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(length, colour, type, thickness);
-    }
-
-    @Override
-    public String toString() {
-        return "length=" + length + ", colour=" + colour + ", type=" + type + ", thickness=" + thickness;
     }
 }

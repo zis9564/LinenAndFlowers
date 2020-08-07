@@ -6,8 +6,8 @@ import java.util.List;
 public interface TypeService {
 
     Type addType(Type type);
-    Type deleteType(long id);
-    Type updateType(Type newType);
+//    Type deleteType(long id);
+//    Type updateType(Type newType);
     Type getOne(long id);
-    List<Type> getAll();
+//    List<Type> getAll();
 }
