@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fabrics")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Fabric extends BaseEntity {
+public class Fabric extends AbstractEntity {
 
     @Column(name = "length", nullable = false)
     private int length;
@@ -28,7 +28,6 @@ public class Fabric extends BaseEntity {
     private Thickness thickness;
 
     public Fabric() {
-        super();
     }
 
     public int getLength() {

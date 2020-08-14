@@ -1,5 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +9,13 @@ import java.util.List;
 @Entity
 @Table(name = "thickness")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Thickness extends BaseEntity {
+public class Thickness extends AbstractEntity {
 
     @Column(name = "thickness", unique = true)
     private int thickness;
 
     @OneToMany(mappedBy = "thickness", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonBackReference
+    @JsonBackReference
     private List<Fabric> fabrics = new ArrayList<>();
 
     public Thickness() {}
