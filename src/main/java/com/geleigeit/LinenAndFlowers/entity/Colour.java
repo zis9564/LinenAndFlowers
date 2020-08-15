@@ -3,6 +3,8 @@ package com.geleigeit.LinenAndFlowers.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Colour extends AbstractEntity {
 
+//    @NotBlank(message = "colour name is mandatory")
+//    @Min(message = "colour name cannot be less than 3 characters", value = 3)
     @Column(name = "colour", unique = true)
     private String colour;
 

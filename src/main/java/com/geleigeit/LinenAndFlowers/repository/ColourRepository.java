@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ColourRepository extends CommonRepository<Colour> {
+    Colour findByColour(String colour);
 }
