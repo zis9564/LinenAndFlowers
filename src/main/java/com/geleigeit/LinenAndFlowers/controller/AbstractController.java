@@ -1,25 +1,20 @@
 package com.geleigeit.LinenAndFlowers.controller;
 
-import com.geleigeit.LinenAndFlowers.Validator.AbstractValidator;
+import com.geleigeit.LinenAndFlowers.validator.AbstractValidator;
+import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import com.geleigeit.LinenAndFlowers.config.exception.NotFoundException;
-import com.geleigeit.LinenAndFlowers.repository.CommonRepository;
 import com.geleigeit.LinenAndFlowers.service.CommonService;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.server.ResponseStatusException;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 
-public abstract class AbstractController<E extends AbstractEntity, S extends CommonService<E>, V extends AbstractValidator<E>> implements CommonController<E> {
+public abstract class AbstractController<E extends AbstractEntity,
+        S extends CommonService<E>,
+        V extends AbstractValidator<E>>
+        implements CommonController<E> {
 
     private final S service;
 
@@ -46,17 +41,12 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Com
     }
 
     @Override
-    public void post(@Validated @RequestBody E e, BindingResult result) {
-        validator.validate(e, result);
-        if (result.hasErrors()) {
-            FieldError errors = result.getFieldError();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getDefaultMessage());
-        }
-        service.addOne(e);
+    public void post(E e) {
+            service.addOne(e);
     }
 
     @Override
-    public E put(@RequestBody @Valid E e) {
+    public E put(E e) {
         try {
             return service.update(e);
         } catch (NotFoundException exception) {

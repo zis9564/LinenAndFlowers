@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.Validator;
+package com.geleigeit.LinenAndFlowers.validator;
 
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import org.springframework.validation.Errors;

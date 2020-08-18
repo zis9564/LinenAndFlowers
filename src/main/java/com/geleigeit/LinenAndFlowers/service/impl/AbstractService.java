@@ -1,7 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import com.geleigeit.LinenAndFlowers.config.exception.NotFoundException;
+import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.CommonRepository;
 import com.geleigeit.LinenAndFlowers.service.CommonService;
 import org.apache.logging.log4j.LogManager;

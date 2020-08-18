@@ -1,6 +1,7 @@
-package com.geleigeit.LinenAndFlowers.controller;
+package com.geleigeit.LinenAndFlowers.controller.classControllers;
 
-import com.geleigeit.LinenAndFlowers.Validator.FabricValidator;
+import com.geleigeit.LinenAndFlowers.validator.classValidators.FabricValidator;
+import com.geleigeit.LinenAndFlowers.controller.AbstractController;
 import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.service.impl.FabricService;
 import org.springframework.web.bind.annotation.RequestMapping;

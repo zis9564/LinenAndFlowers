@@ -1,16 +1,11 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
-import com.geleigeit.LinenAndFlowers.config.exception.NotFoundException;
-import com.geleigeit.LinenAndFlowers.entity.Role;
 import com.geleigeit.LinenAndFlowers.entity.User;
 import com.geleigeit.LinenAndFlowers.repository.RoleRepository;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class UserService extends AbstractService<User, UserRepository> {

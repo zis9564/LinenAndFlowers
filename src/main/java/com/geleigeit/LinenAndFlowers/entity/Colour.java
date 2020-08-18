@@ -3,18 +3,19 @@ package com.geleigeit.LinenAndFlowers.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "colour")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Colour extends AbstractEntity {
+public class Colour extends AbstractEntity implements Serializable {
 
-//    @NotBlank(message = "colour name is mandatory")
-//    @Min(message = "colour name cannot be less than 3 characters", value = 3)
+    @Size(min = 3, max = 32)
+    @NotBlank(message = "colour.colourName.lessThanMinValue")
     @Column(name = "colour", unique = true)
     private String colour;
 

@@ -1,6 +1,7 @@
-package com.geleigeit.LinenAndFlowers.controller;
+package com.geleigeit.LinenAndFlowers.controller.classControllers;
 
-import com.geleigeit.LinenAndFlowers.Validator.ThicknessValidator;
+import com.geleigeit.LinenAndFlowers.validator.classValidators.ThicknessValidator;
+import com.geleigeit.LinenAndFlowers.controller.AbstractController;
 import com.geleigeit.LinenAndFlowers.entity.Thickness;
 import com.geleigeit.LinenAndFlowers.service.impl.ThicknessService;
 import org.springframework.web.bind.annotation.RequestMapping;
