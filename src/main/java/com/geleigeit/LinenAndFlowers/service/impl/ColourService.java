@@ -2,6 +2,7 @@ package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Colour;
 import com.geleigeit.LinenAndFlowers.repository.ColourRepository;
+import com.geleigeit.LinenAndFlowers.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,9 @@
-package com.geleigeit.LinenAndFlowers.validator;
+package com.geleigeit.LinenAndFlowers.validator.classValidators;
 
-import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public abstract class AbstractValidator<E extends AbstractEntity> implements Validator {
+public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {

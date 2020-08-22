@@ -2,6 +2,7 @@ package com.geleigeit.LinenAndFlowers.service.impl;
 
 import com.geleigeit.LinenAndFlowers.entity.Fabric;
 import com.geleigeit.LinenAndFlowers.repository.FabricRepository;
+import com.geleigeit.LinenAndFlowers.service.AbstractService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("thickness")
+@RequestMapping("api/thickness")
 public class ThicknessController extends AbstractController<Thickness, ThicknessService, ThicknessValidator> {
 
     public ThicknessController(ThicknessService service, ThicknessValidator validator) {

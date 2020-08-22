@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("fabric")
+@RequestMapping("api/fabric")
 public class FabricController extends AbstractController<Fabric, FabricService, FabricValidator> {
 
     public FabricController(FabricService service, FabricValidator validator) {

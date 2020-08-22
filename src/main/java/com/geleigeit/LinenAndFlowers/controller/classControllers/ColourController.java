@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/colour")
+@RequestMapping("api/colour")
 public class ColourController extends AbstractController<Colour, ColourService, ColourValidator> {
 
     public ColourController(ColourService service, ColourValidator validator) {

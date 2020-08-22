@@ -1,10 +1,12 @@
 package com.geleigeit.LinenAndFlowers.repository;
 
 import com.geleigeit.LinenAndFlowers.entity.User;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends CommonRepository<User> {
+import java.util.Optional;
 
-    User findByUserName(String username);
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
+    Optional<User> findAllByEmail(String email);
 }

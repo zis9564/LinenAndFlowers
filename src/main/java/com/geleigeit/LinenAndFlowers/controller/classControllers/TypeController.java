@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("type")
+@RequestMapping("api/type")
 public class TypeController extends AbstractController<Type, TypeService, TypeValidator> {
 
     public TypeController(TypeService service, TypeValidator validator) {

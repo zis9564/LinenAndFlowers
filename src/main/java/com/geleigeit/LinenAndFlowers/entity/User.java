@@ -1,34 +1,81 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
+import com.geleigeit.LinenAndFlowers.entity.enums.Role;
+import com.geleigeit.LinenAndFlowers.entity.enums.Status;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractEntity {
+public class User {
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Transient
-    private String confirmPassword;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role", columnDefinition = "USER")
+    private Role role;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role roles;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status", columnDefinition = "active")
+    private Status status;
 
     public User() {
     }
 
-    public String getUserName() {
-        return userName;
+    public User(long id, String email, String firstName, String lastName, String password, Role role, Status status) {
+        this.id = id;
+        email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.role = role;
+        this.status = status;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -39,19 +86,19 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public Role getRole() {
+        return role;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public Role getRoles() {
-        return roles;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setRoles(Role roles) {
-        this.roles = roles;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

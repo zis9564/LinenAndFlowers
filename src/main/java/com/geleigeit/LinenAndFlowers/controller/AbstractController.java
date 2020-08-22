@@ -6,6 +6,7 @@ import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import com.geleigeit.LinenAndFlowers.service.CommonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

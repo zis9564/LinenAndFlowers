@@ -1,6 +1,7 @@
 package com.geleigeit.LinenAndFlowers.service;
 
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import java.util.List;
 

@@ -1,6 +1,8 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import java.util.ArrayList;
