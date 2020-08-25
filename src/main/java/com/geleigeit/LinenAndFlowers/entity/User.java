@@ -38,7 +38,7 @@ public class User {
 
     public User(long id, String email, String firstName, String lastName, String password, Role role, Status status) {
         this.id = id;
-        email = email;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -59,7 +59,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
 
     public String getFirstName() {

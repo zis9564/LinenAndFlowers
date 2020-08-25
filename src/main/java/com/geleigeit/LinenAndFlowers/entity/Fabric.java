@@ -1,36 +1,35 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "fabrics")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Fabric extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "length", nullable = false)
     private int length;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "colour_id", nullable = false)
-//    @JsonManagedReference
     private Colour colour;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "type_id", nullable = false)
-//    @JsonManagedReference
     private Type type;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "thickness_id", nullable = false)
-//    @JsonManagedReference
     private Thickness thickness;
 
     public Fabric() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public int getLength() {
@@ -47,6 +46,10 @@ public class Fabric extends AbstractEntity {
 
     public Thickness getThickness() {
         return thickness;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setLength(int length) {

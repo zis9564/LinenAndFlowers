@@ -1,8 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,8 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "types")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Type extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "type", unique = true)
     private String type;
@@ -23,12 +24,20 @@ public class Type extends AbstractEntity {
     public Type() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getType() {
         return type;
     }
 
     public List<Fabric> getFabrics() {
         return fabrics;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setType(String type) {

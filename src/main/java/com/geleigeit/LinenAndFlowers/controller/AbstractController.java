@@ -1,12 +1,11 @@
 package com.geleigeit.LinenAndFlowers.controller;
 
-import com.geleigeit.LinenAndFlowers.validator.AbstractValidator;
-import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.service.CommonService;
+import com.geleigeit.LinenAndFlowers.validator.AbstractValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,13 +18,10 @@ public abstract class AbstractController<E extends AbstractEntity,
 
     private final S service;
 
-    private final V validator;
-
     private static final Logger logger = LogManager.getLogger(AbstractController.class);
 
     protected AbstractController(S service, V validator) {
         this.service = service;
-        this.validator = validator;
     }
 
     @Override

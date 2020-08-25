@@ -1,7 +1,6 @@
 package com.geleigeit.LinenAndFlowers.validator;
 
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

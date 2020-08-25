@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.rest;
+package com.geleigeit.LinenAndFlowers.controller;
 
 import com.geleigeit.LinenAndFlowers.entity.User;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -26,8 +25,8 @@ import java.util.Map;
 public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
-    private JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public AuthenticationRestController(AuthenticationManager authenticationManager, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
@@ -38,7 +37,7 @@ public class AuthenticationRestController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequestDTO request) {
         try {
-            String email = request.getEmail();
+//            String email = request.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
             User user = userRepository.findAllByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("user doesn't exist"));
             String  token = jwtTokenProvider.createToken(request.getEmail(), user.getRole().name());

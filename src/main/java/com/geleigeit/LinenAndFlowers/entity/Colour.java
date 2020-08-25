@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,8 +10,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "colour")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Colour extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Size(min = 3, max = 32)
     @NotBlank(message = "colour.colourName.wrongLength")
@@ -25,12 +28,20 @@ public class Colour extends AbstractEntity {
     public Colour() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getColour() {
         return colour;
     }
 
     public List<Fabric> getFabrics() {
         return fabrics;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setColour(String colour) {

@@ -6,5 +6,4 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface CommonRepository<E extends AbstractEntity> extends CrudRepository<E, Long> {
-//    <E extends AbstractAuditable<E, Long>>
 }

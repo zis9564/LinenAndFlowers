@@ -3,8 +3,6 @@ package com.geleigeit.LinenAndFlowers.service;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.CommonRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,8 +10,6 @@ import java.util.List;
 public abstract class AbstractService<E extends AbstractEntity,
                                         R extends CommonRepository<E>>
                                         implements CommonService<E> {
-
-    private static final Logger logger = LogManager.getLogger(AbstractService.class);
 
     protected final R repository;
 

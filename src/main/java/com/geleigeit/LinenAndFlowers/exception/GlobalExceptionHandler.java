@@ -57,7 +57,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ ConstraintViolationException.class })
     public ResponseEntity<Object> handleConstraintViolation(
-            ConstraintViolationException ex, WebRequest request) {
+            ConstraintViolationException ex) {
         List<String> errors = new ArrayList<>();
         for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
             errors.add(violation.getRootBeanClass().getName() + " " +
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
-            MethodArgumentTypeMismatchException ex, WebRequest request) {
+            MethodArgumentTypeMismatchException ex) {
         String error =
                 ex.getName() + " should be of type " + Objects.requireNonNull(ex.getRequiredType()).getName();
 
@@ -118,7 +118,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 //    @ExceptionHandler({ Exception.class })
-//    public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
+//    public ResponseEntity<Object> handleAll(Exception ex) {
 //        ApiError apiError = new ApiError(
 //                HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), "error occurred");
 //        return new ResponseEntity<>(

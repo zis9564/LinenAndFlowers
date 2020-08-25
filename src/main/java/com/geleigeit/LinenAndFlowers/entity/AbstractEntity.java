@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -8,44 +8,30 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AbstractEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@JsonIgnoreProperties({ "createdBy", "modifiedBy", "creationDate", "lastModifiedDate"})
+public abstract class AbstractEntity implements Serializable {
 
     @CreatedBy
-    @JsonIgnore
     @Column(name = "created_by")
     private String createdBy;
 
-    @CreatedDate
-    @JsonIgnore
-    @Column(name = "created_date", nullable = false, updatable = false)
-    private long creationDate;
-
     @LastModifiedBy
-    @JsonIgnore
     @Column(name = "modified_by")
     private String ModifiedBy;
 
+    @CreatedDate
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private long creationDate;
+
     @LastModifiedDate
-    @JsonIgnore
     @Column(name = "modified_date")
     private long lastModifiedDate;
 
     public AbstractEntity() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCreatedBy() {
