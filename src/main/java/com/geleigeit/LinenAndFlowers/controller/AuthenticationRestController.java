@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.controller;
 
-import com.geleigeit.LinenAndFlowers.entity.User;
+import com.geleigeit.LinenAndFlowers.entity.tables.User;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
 import com.geleigeit.LinenAndFlowers.security.JwtTokenProvider;
 import org.springframework.http.HttpStatus;

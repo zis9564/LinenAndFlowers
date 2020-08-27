@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.entity.enums;
 
-public enum Size {
+public enum SizeEnum {
     XXS,
     XS,
     S,
@@ -10,6 +10,6 @@ public enum Size {
     XXL,
     XXXL;
 
-    Size() {
+    SizeEnum() {
     }
 }

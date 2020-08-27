@@ -29,7 +29,6 @@ public abstract class AbstractService<E extends AbstractEntity,
 
     @Transactional
     public E update(E newE){
-//        E e = getOne(newE.getId());
         return repository.save(newE);
     }
 

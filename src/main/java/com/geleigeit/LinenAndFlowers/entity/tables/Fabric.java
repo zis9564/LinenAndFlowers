@@ -1,6 +1,10 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
+
+import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "fabrics")
@@ -10,17 +14,22 @@ public class Fabric extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @PositiveOrZero(message = "fabric.fabricLength.negativeValue")
+    @NotEmpty(message = "fabric.fabricLength.wrongValue")
     @Column(name = "length", nullable = false)
     private int length;
 
+//    @NotEmpty(message = "fabric.fabricColour.emptyOrNullValue")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "colour_id", nullable = false)
     private Colour colour;
 
+//    @NotEmpty(message = "fabric.fabricType.emptyOrNullValue")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "type_id", nullable = false)
     private Type type;
 
+//    @NotEmpty(message = "fabric.fabricThickness.emptyOrNullValue")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "thickness_id", nullable = false)
     private Thickness thickness;

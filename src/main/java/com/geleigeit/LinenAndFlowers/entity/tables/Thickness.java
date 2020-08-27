@@ -1,8 +1,11 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class Thickness extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "thickness.thicknessValue.null")
+    @Range(min=80, max=350, message = "thickness.thicknessValue.wrongValue")
     @Column(name = "thickness", unique = true)
     private int thickness;
 

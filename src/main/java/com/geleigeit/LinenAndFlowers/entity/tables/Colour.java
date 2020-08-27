@@ -1,6 +1,7 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.*;
+import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "colour")
+@Table(name = "colours")
 public class Colour extends AbstractEntity {
 
     @Id

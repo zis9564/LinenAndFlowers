@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.repository;
 
-import com.geleigeit.LinenAndFlowers.entity.Thickness;
+import com.geleigeit.LinenAndFlowers.entity.tables.Thickness;
 import org.springframework.stereotype.Repository;
 
 @Repository

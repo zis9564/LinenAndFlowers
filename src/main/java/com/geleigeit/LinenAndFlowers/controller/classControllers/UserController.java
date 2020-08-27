@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.controller.classControllers;
 
-import com.geleigeit.LinenAndFlowers.entity.User;
+import com.geleigeit.LinenAndFlowers.entity.tables.User;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

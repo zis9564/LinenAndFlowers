@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.geleigeit.LinenAndFlowers.entity.enums.Role;
 import com.geleigeit.LinenAndFlowers.entity.enums.Status;

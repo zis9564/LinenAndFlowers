@@ -1,7 +1,6 @@
 package com.geleigeit.LinenAndFlowers.config;
 
 import com.geleigeit.LinenAndFlowers.config.auditor.AuditorAwareImpl;
-import com.geleigeit.LinenAndFlowers.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

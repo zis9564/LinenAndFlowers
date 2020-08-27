@@ -1,11 +1,11 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
-import com.geleigeit.LinenAndFlowers.entity.enums.Size;
+import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 public class Item extends AbstractEntity {
 
     @Id
@@ -17,11 +17,11 @@ public class Item extends AbstractEntity {
     private Fabric fabric;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "vendor_code", nullable = false)
-    private Product product;
+    @JoinColumn(name = "item_name", nullable = false)
+    private ItemName itemName;
 
-    @Column(name = "size")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "size", nullable = false)
     private Size size;
 
     public Item() {
@@ -43,12 +43,12 @@ public class Item extends AbstractEntity {
         this.fabric = fabric;
     }
 
-    public Product getProduct() {
-        return product;
+    public ItemName getItemName() {
+        return itemName;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setItemName(ItemName itemName) {
+        this.itemName = itemName;
     }
 
     public Size getSize() {

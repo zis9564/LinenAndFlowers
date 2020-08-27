@@ -1,8 +1,11 @@
-package com.geleigeit.LinenAndFlowers.entity;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class Type extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Size(min = 3, max = 32)
+    @NotBlank(message = "type.typeName.wrongLength")
     @Column(name = "type", unique = true)
     private String type;
 
