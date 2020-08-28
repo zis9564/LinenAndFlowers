@@ -24,6 +24,7 @@ public class ItemService extends AbstractService<Item, ItemRepository> {
         item.setItemName(newItem.getItemName());
         item.setSize(newItem.getSize());
         logger.debug("item {} has updated", item.hashCode());
-        return repository.save(item);
+        repository.save(item);
+        return getOne(newItem.getId());
     }
 }

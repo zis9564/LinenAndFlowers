@@ -1,12 +1,10 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
-import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "fabric_count")
-public class FabricCount extends AbstractEntity {
+public class FabricCount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +13,11 @@ public class FabricCount extends AbstractEntity {
     @Column(name = "length", nullable = false)
     private int length;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "item_name", nullable = false)
-    private ItemName itemName;
+    @Column(name = "vendor_code", nullable = false)
+    private int vendorCode;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "size", nullable = false)
-    private Size size;
+    @Column(name = "size", nullable = false)
+    private String size;
 
     public FabricCount() {
     }
@@ -42,19 +38,19 @@ public class FabricCount extends AbstractEntity {
         this.length = length;
     }
 
-    public ItemName getItemName() {
-        return itemName;
+    public int getVendorCode() {
+        return vendorCode;
     }
 
-    public void setItemName(ItemName itemName) {
-        this.itemName = itemName;
+    public void setVendorCode(int vendorCode) {
+        this.vendorCode = vendorCode;
     }
 
-    public Size getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Size size) {
+    public void setSize(String size) {
         this.size = size;
     }
 }

@@ -15,7 +15,7 @@ public class Fabric extends AbstractEntity {
     private long id;
 
     @PositiveOrZero(message = "fabric.fabricLength.negativeValue")
-    @NotEmpty(message = "fabric.fabricLength.wrongValue")
+//    @NotEmpty(message = "fabric.fabricLength.wrongValue")
     @Column(name = "length", nullable = false)
     private int length;
 

@@ -22,7 +22,6 @@ public class ItemNameService extends AbstractService<ItemName, ItemNameRepositor
         ItemName itemName = getOne(newItemName.getId());
         itemName.setName(newItemName.getName());
         itemName.setVendorCode(newItemName.getVendorCode());
-        itemName.setFabricCountList(newItemName.getFabricCountList());
         itemName.setItems(newItemName.getItems());
         logger.debug("item_name {} has updated", itemName.hashCode());
         return repository.save(itemName);

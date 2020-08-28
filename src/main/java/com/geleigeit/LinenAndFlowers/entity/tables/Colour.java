@@ -19,11 +19,12 @@ public class Colour extends AbstractEntity {
 
     @Size(min = 3, max = 32)
     @NotBlank(message = "colour.colourName.wrongLength")
-    @Column(name = "colour", unique = true)
+    @Column(name = "colour", unique = true, nullable = false)
     private String colour;
 
-    @OneToMany(mappedBy = "colour", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToMany(mappedBy = "colour", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+//    @NotEmpty(message = "colour.colourFabrics.emptyOrNullValue")
+    @JsonBackReference(value = "colour-fabric")
     private List<Fabric> fabrics = new ArrayList<>();
 
     public Colour() {

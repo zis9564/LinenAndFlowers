@@ -29,7 +29,8 @@ public class FabricService extends AbstractService<Fabric, FabricRepository> {
         fabric.setType(newFabric.getType());
         fabric.setThickness(newFabric.getThickness());
         logger.debug("fabric {} has updated", fabric.hashCode());
-        return repository.save(fabric);
+        repository.save(fabric);
+        return getOne(newFabric.getId());
     }
 
     @Transactional
