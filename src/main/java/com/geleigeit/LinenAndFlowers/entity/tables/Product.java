@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "item_names")
-public class ItemName extends AbstractEntity {
+@Table(name = "products")
+public class Product extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +27,15 @@ public class ItemName extends AbstractEntity {
     @Column(name = "vendor_code", nullable = false, unique = true)
     private String vendorCode;
 
+    @Column(name = "blueprint_root")
+    private String blueprintRoot;
+
 //    @NotEmpty(message = "itemName.items.emptyOrNull")
-    @OneToMany(mappedBy = "itemName", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JsonBackReference(value = "itemName-item")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference(value = "product-item")
     private List<Item> items = new ArrayList<>();
 
-    public ItemName() {
+    public Product() {
     }
 
     public long getId() {
@@ -57,6 +60,14 @@ public class ItemName extends AbstractEntity {
 
     public void setVendorCode(String vendorCode) {
         this.vendorCode = vendorCode;
+    }
+
+    public String getBlueprintRoot() {
+        return blueprintRoot;
+    }
+
+    public void setBlueprintRoot(String blueprintRoot) {
+        this.blueprintRoot = blueprintRoot;
     }
 
     public List<Item> getItems() {

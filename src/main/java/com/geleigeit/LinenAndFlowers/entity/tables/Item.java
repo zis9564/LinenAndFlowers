@@ -32,8 +32,8 @@ public class Item extends AbstractEntity {
 
     //    @NotEmpty(message = "item.itemName.emptyOrNull")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "item_name", nullable = false)
-    private ItemName itemName;
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     public Item() {
     }
@@ -70,11 +70,11 @@ public class Item extends AbstractEntity {
         this.fabric = fabric;
     }
 
-    public ItemName getItemName() {
-        return itemName;
+    public Product getItemName() {
+        return product;
     }
 
-    public void setItemName(ItemName itemName) {
-        this.itemName = itemName;
+    public void setItemName(Product product) {
+        this.product = product;
     }
 }
