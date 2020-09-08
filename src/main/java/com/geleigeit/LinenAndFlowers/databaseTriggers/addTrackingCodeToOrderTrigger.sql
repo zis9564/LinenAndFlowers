@@ -8,18 +8,18 @@ $$ LANGUAGE plpgsql;
 
 CREATE or REPLACE FUNCTION status_update() RETURNS TRIGGER AS $$
 BEGIN
-    IF (new.tracking_code != old.tracking_code OR old.tracking_code IS NULL) THEN
+    IF (new.tracking_code NOTNULL AND old.tracking_code IS NULL) THEN
         PERFORM status_function(old.id);
         RETURN new;
     ELSE
-        RETURN old;
+        RETURN null;
     END IF;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER change_status
+CREATE TRIGGER change_status_to_in_delivery
     AFTER UPDATE
-        OF tracking_code
+    OF tracking_code
     ON orders
     FOR EACH ROW
 EXECUTE PROCEDURE status_update();

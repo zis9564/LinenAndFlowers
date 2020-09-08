@@ -29,7 +29,7 @@ public class Order extends AbstractEntity {
     private Date deadline;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "order_status_id", nullable = false)
+    @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
     @Enumerated(value = EnumType.STRING)
