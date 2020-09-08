@@ -9,27 +9,28 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties({ "createdBy", "modifiedBy", "creationDate", "lastModifiedDate"})
+@JsonIgnoreProperties({ "createdBy", "modifiedBy", "createdDate", "lastModified"})
 public abstract class AbstractEntity implements Serializable {
 
     @CreatedBy
-    @Column(name = "created_by")
+    @Column(name = "created_by", nullable = false, updatable = false)
     private String createdBy;
 
     @LastModifiedBy
     @Column(name = "modified_by")
-    private String ModifiedBy;
+    private String modifiedBy;
 
     @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
-    private long creationDate;
+    @Column(name = "created", nullable = false, updatable = false)
+    private Date createdDate;
 
     @LastModifiedDate
-    @Column(name = "modified_date")
-    private long lastModifiedDate;
+    @Column(name = "modified")
+    private Date lastModified;
 
     public AbstractEntity() {
     }
@@ -42,27 +43,27 @@ public abstract class AbstractEntity implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public long getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(long creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public String getModifiedBy() {
-        return ModifiedBy;
+        return modifiedBy;
     }
 
     public void setModifiedBy(String  modifiedBy) {
-        ModifiedBy = modifiedBy;
+        modifiedBy = modifiedBy;
     }
 
-    public long getLastModifiedDate() {
-        return lastModifiedDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setLastModifiedDate(long lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }

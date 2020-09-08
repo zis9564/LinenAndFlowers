@@ -1,10 +1,12 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PositiveOrZero;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "fabrics")
@@ -34,6 +36,10 @@ public class Fabric extends AbstractEntity {
     @JoinColumn(name = "thickness_id", nullable = false)
     private Thickness thickness;
 
+    @OneToMany(mappedBy = "fabric", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference(value = "fabric-item")
+    private List<Item> items = new ArrayList<>();
+
     public Fabric() {
     }
 
@@ -57,6 +63,10 @@ public class Fabric extends AbstractEntity {
         return thickness;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -75,5 +85,9 @@ public class Fabric extends AbstractEntity {
 
     public void setThickness(Thickness thickness) {
         this.thickness = thickness;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

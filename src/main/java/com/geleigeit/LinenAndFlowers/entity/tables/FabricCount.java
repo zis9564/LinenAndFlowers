@@ -14,7 +14,10 @@ public class FabricCount {
     private int length;
 
     @Column(name = "vendor_code", nullable = false)
-    private int vendorCode;
+    private String vendorCode;
+
+    @Column(name = "item_name", nullable = false, unique = true)
+    private String itemNAme;
 
     @Column(name = "size", nullable = false)
     private String size;
@@ -38,11 +41,11 @@ public class FabricCount {
         this.length = length;
     }
 
-    public int getVendorCode() {
+    public String getVendorCode() {
         return vendorCode;
     }
 
-    public void setVendorCode(int vendorCode) {
+    public void setVendorCode(String vendorCode) {
         this.vendorCode = vendorCode;
     }
 

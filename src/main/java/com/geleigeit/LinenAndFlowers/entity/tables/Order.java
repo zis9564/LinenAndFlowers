@@ -1,12 +1,15 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import com.geleigeit.LinenAndFlowers.entity.enums.DeliveryService;
-import com.geleigeit.LinenAndFlowers.entity.enums.OrderStatus;
 import com.geleigeit.LinenAndFlowers.entity.enums.Shop;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -16,20 +19,17 @@ public class Order extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "departure_date", nullable = false)
+    @Column(name = "departure_date")
     private Date departureDate;
 
-    @Column(name = "arrival_date", nullable = false)
+    @Column(name = "arrival_date")
     private Date arrivalDate;
-
-    @Column(name = "tracking_code", nullable = false, unique = true)
-    private String trackingCode;
 
     @Column(name = "deadline", nullable = false)
     private Date deadline;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "order_status_id", nullable = false)
     private OrderStatus orderStatus;
 
     @Enumerated(value = EnumType.STRING)
@@ -47,6 +47,27 @@ public class Order extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    private List<Item> items = new ArrayList<>();
+
+    @Column(name = "tracking_code", unique = true)
+    private String trackingCode;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "delivery_status")
+    private String status;
+
+    @Column(name = "status_description")
+    private String description;
+
+    @Column(name = "last_moving_date")
+    private String date;
 
     public Order() {
     }
@@ -129,5 +150,56 @@ public class Order extends AbstractEntity {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private void setStatusAfterCreation() {
     }
 }
