@@ -2,8 +2,11 @@ package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +18,18 @@ public class Customer extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Size(min = 3, max = 32)
+    @NotBlank
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Size(min = 3, max = 255)
+    @NotBlank
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Size(min = 6, max = 64)
+    @NotBlank
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

@@ -3,27 +3,25 @@ package com.geleigeit.LinenAndFlowers.entity.tables;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "heights")
-public class Height {
+@Table
+public class Size {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "height", nullable = false, unique = true)
-    private String height;
+    @Column(name = "size", nullable = false, unique = true)
+    private String size;
 
-    @OneToMany(mappedBy = "height", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @NotEmpty
-    @JsonBackReference(value = "height-item")
+    @OneToMany(mappedBy = "size", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference(value = "size-items")
     private List<Item> items = new ArrayList<>();
 
-    public Height() {
+    public Size() {
     }
 
     public long getId() {
@@ -34,12 +32,12 @@ public class Height {
         this.id = id;
     }
 
-    public String getHeight() {
-        return height;
+    public String getSize() {
+        return size;
     }
 
-    public void setHeight(String height) {
-        this.height = height;
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public List<Item> getItems() {

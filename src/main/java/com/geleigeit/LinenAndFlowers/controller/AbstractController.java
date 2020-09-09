@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public abstract class AbstractController<E extends AbstractEntity,
@@ -17,11 +18,13 @@ public abstract class AbstractController<E extends AbstractEntity,
         implements CommonController<E> {
 
     private final S service;
+    private final V validator;
 
     private static final Logger logger = LogManager.getLogger(AbstractController.class);
 
     protected AbstractController(S service, V validator) {
         this.service = service;
+        this.validator = validator;
     }
 
     @Override
@@ -39,7 +42,7 @@ public abstract class AbstractController<E extends AbstractEntity,
 
     @Override
     public void post(E e) {
-            service.addOne(e);
+        service.addOne(e);
     }
 
     @Override

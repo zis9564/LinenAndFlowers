@@ -17,13 +17,12 @@ public class Thickness extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull(message = "thickness.thicknessValue.null")
-    @Range(min=80, max=350, message = "thickness.thicknessValue.wrongValue")
+    @NotNull
+    @Range(min=80, max=350)
     @Column(name = "thickness", unique = true, nullable = false)
     private int thickness;
 
     @OneToMany(mappedBy = "thickness", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-//    @NotEmpty(message = "thickness.thicknessFabrics.emptyOrNullValue")
     @JsonBackReference(value = "thickness-fabric")
     private List<Fabric> fabrics = new ArrayList<>();
 

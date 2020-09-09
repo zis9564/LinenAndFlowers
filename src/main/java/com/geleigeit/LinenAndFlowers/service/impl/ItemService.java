@@ -1,30 +1,35 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
+import com.geleigeit.LinenAndFlowers.calculator.FabricLengthCalculator;
 import com.geleigeit.LinenAndFlowers.entity.tables.Item;
+import com.geleigeit.LinenAndFlowers.exception.NegativeValueException;
 import com.geleigeit.LinenAndFlowers.repository.ItemRepository;
 import com.geleigeit.LinenAndFlowers.service.AbstractService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ItemService extends AbstractService<Item, ItemRepository> {
 
+    private final FabricLengthCalculator fabricLengthCalculator;
+
     @Autowired
-    public ItemService(ItemRepository repository) {
+    public ItemService(ItemRepository repository,
+                       FabricLengthCalculator fabricLengthCalculator) {
         super(repository);
+        this.fabricLengthCalculator = fabricLengthCalculator;
+
     }
-    Logger logger = LogManager.getLogger(ItemService.class);
 
     @Override
-    public Item update(Item newItem) {
-        Item item = getOne(newItem.getId());
-        item.setFabric(newItem.getFabric());
-        item.setItemName(newItem.getItemName());
-        item.setSize(newItem.getSize());
-        logger.debug("item {} has updated", item.hashCode());
-        repository.save(item);
-        return getOne(newItem.getId());
+    public void addOne(Item item) {
+        try {
+            repository.save(fabricLengthCalculator.calculateFabricLength(item));
+        } catch (NegativeValueException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.I_AM_A_TEAPOT, "not enough fabric", e);
+        }
     }
 }

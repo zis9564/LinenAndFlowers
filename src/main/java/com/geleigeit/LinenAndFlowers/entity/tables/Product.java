@@ -18,19 +18,19 @@ public class Product extends AbstractEntity {
     private long id;
 
     @Size(min = 3, max = 16)
-    @NotBlank(message = "itemName.name.wrongLength")
+    @NotBlank
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Size(min = 3, max = 4)//check
-    @NotBlank(message = "itemName.vendorCode.wrongLength")
+    @Size(min = 7, max = 16)
+    @NotBlank
     @Column(name = "vendor_code", nullable = false, unique = true)
     private String vendorCode;
 
+    @Size(min = 10, max = 255)
     @Column(name = "blueprint_root")
     private String blueprintRoot;
 
-//    @NotEmpty(message = "itemName.items.emptyOrNull")
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JsonBackReference(value = "product-item")
     private List<Item> items = new ArrayList<>();

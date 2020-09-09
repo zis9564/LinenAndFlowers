@@ -14,4 +14,6 @@ public class ItemController extends AbstractController<Item, ItemService, ItemVa
     protected ItemController(ItemService service, ItemValidator validator) {
         super(service, validator);
     }
+
+
 }

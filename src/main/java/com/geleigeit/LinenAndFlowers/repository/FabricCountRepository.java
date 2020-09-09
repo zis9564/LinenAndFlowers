@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FabricCountRepository extends CrudRepository<FabricCount, Long> {
+
+    FabricCount findByVendorCodeAndSize(String vendorCode, String size);
 }

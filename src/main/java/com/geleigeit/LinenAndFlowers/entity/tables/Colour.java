@@ -5,6 +5,7 @@ import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,11 @@ public class Colour extends AbstractEntity {
     private long id;
 
     @Size(min = 3, max = 32)
-    @NotBlank(message = "colour.colourName.wrongLength")
+    @NotBlank
     @Column(name = "colour", unique = true, nullable = false)
     private String colour;
 
     @OneToMany(mappedBy = "colour", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-//    @NotEmpty(message = "colour.colourFabrics.emptyOrNullValue")
     @JsonBackReference(value = "colour-fabric")
     private List<Fabric> fabrics = new ArrayList<>();
 

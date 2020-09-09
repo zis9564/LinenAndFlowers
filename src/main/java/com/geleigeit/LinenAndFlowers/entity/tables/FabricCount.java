@@ -17,7 +17,7 @@ public class FabricCount {
     private String vendorCode;
 
     @Column(name = "item_name", nullable = false, unique = true)
-    private String itemNAme;
+    private String itemName;
 
     @Column(name = "size", nullable = false)
     private String size;
@@ -55,5 +55,13 @@ public class FabricCount {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

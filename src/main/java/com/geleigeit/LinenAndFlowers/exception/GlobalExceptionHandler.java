@@ -1,5 +1,6 @@
 package com.geleigeit.LinenAndFlowers.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ ConstraintViolationException.class })
+    @ExceptionHandler({ConstraintViolationException.class })
     public ResponseEntity<Object> handleConstraintViolation(
             ConstraintViolationException ex) {
         List<String> errors = new ArrayList<>();
@@ -113,6 +114,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE,
                 ex.getMessage(), builder.substring(0, builder.length() - 2));
+        return new ResponseEntity<>(
+                apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class })
+    public ResponseEntity<Object> handleDataIntegrityViolation(
+            DataIntegrityViolationException ex) {
+        String error = ex.toString();
+
+        ApiError apiError =
+                new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), error);
         return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }

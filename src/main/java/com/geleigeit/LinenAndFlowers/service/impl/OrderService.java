@@ -61,38 +61,4 @@ public class OrderService extends AbstractService<Order, OrderRepository> implem
             logger.info("no orders with status QUEUE");
         }
     }
-
-    @Override
-    @Transactional
-//    @Scheduled(fixedDelay=10000)
-    public void toInDelivery() {
-        String statusToFind = "IN_DELIVERY";
-        String deliveredKey = "D";
-        OrderStatus statusToSet = orderStatusRepository.findByStatus(statusToFind);
-        List<Order> orders = repository.findAllInDeliveryButNotDelivered(deliveredKey);
-        for (Order order : orders) {
-            if(!order.getOrderStatus().equals(statusToSet)) {
-                order.setOrderStatus(statusToSet);
-                repository.save(order);
-                logger.info("order status IN_PROGRESS was changed to IN_DELIVERY by order.{}", order.hashCode());
-            }
-        }
-    }
-
-    @Override
-    @Transactional
-//    @Scheduled(fixedDelay=10000)
-    public void toDelivered() {
-        String statusToFind = "DELIVERED";
-        String deliveredKey = "D";
-        OrderStatus statusToSet = orderStatusRepository.findByStatus(statusToFind);
-        List<Order> orders = repository.findAllDelivered(deliveredKey);
-        for (Order order : orders) {
-            if(!order.getOrderStatus().equals(statusToSet)) {
-                order.setOrderStatus(statusToSet);
-                repository.save(order);
-                logger.info("order status IN_DELIVERY was changed to DELIVERED by order.{}", order.hashCode());
-            }
-        }
-    }
 }

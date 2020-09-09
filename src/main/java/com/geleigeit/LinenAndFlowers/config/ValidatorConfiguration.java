@@ -15,12 +15,12 @@ public class ValidatorConfiguration {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
-
+//
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource
                 = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("messages.properties");
+        messageSource.setBasename("META-INF/messages.properties");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

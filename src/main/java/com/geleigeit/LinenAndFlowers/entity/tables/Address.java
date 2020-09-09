@@ -2,8 +2,11 @@ package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +18,22 @@ public class Address extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Size(min = 3, max = 255)
+    @NotBlank
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Size(min = 5, max = 13)
+    @NotBlank
     @Column(name = "postcode", nullable = false)
     private String postcode;
 
+    @Size(min = 3, max = 64)
+    @NotBlank
     @Column(name = "city", nullable = false)
     private String city;
 
+    @NonNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;

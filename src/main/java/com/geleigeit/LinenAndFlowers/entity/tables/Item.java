@@ -1,12 +1,10 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import com.geleigeit.LinenAndFlowers.entity.enums.SizeEnum;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -16,23 +14,23 @@ public class Item extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    //    @NotEmpty(message = "item.itemSize.emptyOrNull")
     @NotNull
-    @Column(name = "size", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "size", nullable = false)
     @Enumerated(EnumType.STRING)
-    private SizeEnum size;
+    private Size size;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "height", nullable = false)
     private Height height;
 
-    //    @NotEmpty(message = "item.itemFabric.emptyOrNull")
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fabric", nullable = false)
     private Fabric fabric;
 
-    //    @NotEmpty(message = "item.itemName.emptyOrNull")
+    @NonNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
@@ -48,11 +46,19 @@ public class Item extends AbstractEntity {
         this.id = id;
     }
 
-    public SizeEnum getSize() {
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(SizeEnum size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
@@ -70,13 +76,5 @@ public class Item extends AbstractEntity {
 
     public void setFabric(Fabric fabric) {
         this.fabric = fabric;
-    }
-
-    public Product getItemName() {
-        return product;
-    }
-
-    public void setItemName(Product product) {
-        this.product = product;
     }
 }

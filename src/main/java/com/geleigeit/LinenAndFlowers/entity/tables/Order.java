@@ -1,10 +1,8 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import com.geleigeit.LinenAndFlowers.entity.enums.DeliveryService;
 import com.geleigeit.LinenAndFlowers.entity.enums.Shop;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -67,7 +65,7 @@ public class Order extends AbstractEntity {
     private String description;
 
     @Column(name = "last_moving_date")
-    private String date;
+    private Date lastTrackingDate;
 
     public Order() {
     }
@@ -192,14 +190,11 @@ public class Order extends AbstractEntity {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
+    public Date getLastTrackingDate() {
+        return lastTrackingDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    private void setStatusAfterCreation() {
+    public void setLastTrackingDate(Date lastTrackingDate) {
+        this.lastTrackingDate = lastTrackingDate;
     }
 }

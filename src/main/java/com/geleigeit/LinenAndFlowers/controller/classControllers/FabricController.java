@@ -21,12 +21,12 @@ import java.util.List;
 @RequestMapping("api/fabric")
 public class FabricController extends AbstractController<Fabric, FabricService, FabricValidator> {
 
-    @Autowired
-    FabricService fabricService;
-    private static final Logger logger = LogManager.getLogger(AbstractController.class);
+    private final FabricService fabricService;
+    private final Logger logger = LogManager.getLogger(AbstractController.class);
 
     public FabricController(FabricService service, FabricValidator validator) {
         super(service, validator);
+        this.fabricService = service;
     }
 
     @RequestMapping(value = "/short", method = RequestMethod.GET)

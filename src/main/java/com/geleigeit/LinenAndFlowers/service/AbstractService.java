@@ -3,8 +3,11 @@ package com.geleigeit.LinenAndFlowers.service;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.CommonRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public abstract class AbstractService<E extends AbstractEntity,
@@ -24,7 +27,7 @@ public abstract class AbstractService<E extends AbstractEntity,
 
     @Transactional
     public void delete(long id) {
-            repository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Transactional

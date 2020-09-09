@@ -18,12 +18,11 @@ public class Type extends AbstractEntity {
     private long id;
 
     @Size(min = 3, max = 32)
-    @NotBlank(message = "type.typeName.wrongLength")
+    @NotBlank
     @Column(name = "type", unique = true, nullable = false)
     private String type;
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-//    @NotEmpty(message = "type.typeFabrics.emptyOrNullValue")
     @JsonBackReference(value = "type-fabric")
     private List<Fabric> fabrics = new ArrayList<>();
 
