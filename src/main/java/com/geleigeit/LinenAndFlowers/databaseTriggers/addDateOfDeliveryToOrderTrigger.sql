@@ -1,4 +1,4 @@
-CREATE or REPLACE FUNCTION status_function(bigint) RETURNS VOID AS $$
+CREATE or REPLACE FUNCTION to_delivered_status_function(bigint) RETURNS VOID AS $$
 BEGIN
     UPDATE public.orders SET order_status_id = public.order_statuses.id
     FROM public.order_statuses
@@ -6,10 +6,10 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-CREATE or REPLACE FUNCTION status_update() RETURNS TRIGGER AS $$
+CREATE or REPLACE FUNCTION to_delivered_status_update() RETURNS TRIGGER AS $$
 BEGIN
     IF (new.arrival_date NOTNULL AND old.arrival_date IS NULL) THEN
-        PERFORM status_function(old.id);
+        PERFORM to_delivered_status_function(old.id);
         RETURN new;
     ELSE
         RETURN null;
@@ -22,4 +22,4 @@ CREATE TRIGGER change_status_to_delivered
         OF arrival_date
     ON orders
     FOR EACH ROW
-EXECUTE PROCEDURE status_update();
+EXECUTE PROCEDURE to_delivered_status_update();

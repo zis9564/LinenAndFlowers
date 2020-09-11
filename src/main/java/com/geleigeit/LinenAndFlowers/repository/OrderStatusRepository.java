@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface OrderStatusRepository extends CrudRepository<OrderStatus, Long> {
 
     OrderStatus findByStatus(String status);
+
+    OrderStatus findById(long id);
 }

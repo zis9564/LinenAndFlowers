@@ -1,0 +1,480 @@
+{
+  "trackResponse": {
+    "shipment": [
+      {
+        "package": [
+          {
+            "trackingNumber": "Y0081040191",
+            "deliveryDate": [
+              {
+                "type": "RDD",
+                "date": "20200911"
+              }
+            ],
+            "activity": [
+              {
+                "location": {
+                  "address": {
+                    "city": "Concord",
+                    "stateProvince": "ON",
+                    "postalCode": "",
+                    "country": "CA"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "In Transit",
+                  "code": "AR"
+                },
+                "date": "20200911",
+                "time": "050600"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Buffalo",
+                    "stateProvince": "NY",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200911",
+                "time": "030700"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Buffalo",
+                    "stateProvince": "NY",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200911",
+                "time": "023100"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package is being processed at the clearance agency. / Receiver's customs broker has been assigned. The shipment is now released to move in transit.",
+                  "code": "SR"
+                },
+                "date": "20200911",
+                "time": "022518"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package is being processed at the clearance agency.",
+                  "code": "SR"
+                },
+                "date": "20200911",
+                "time": "022434"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Louisville",
+                    "stateProvince": "KY",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200910",
+                "time": "180000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Louisville",
+                    "stateProvince": "KY",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200910",
+                "time": "102900"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Newark",
+                    "stateProvince": "NJ",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200910",
+                "time": "083200"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Newark",
+                    "stateProvince": "NJ",
+                    "postalCode": "",
+                    "country": "US"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200910",
+                "time": "052300"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package was released by the customs agency.",
+                  "code": "SR"
+                },
+                "date": "20200910",
+                "time": "041657"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Import C.O.D. (ICOD) charges have been paid or billed.",
+                  "code": "1D"
+                },
+                "date": "20200910",
+                "time": "040945"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Import C.O.D. charges are due for this package. Select Pay Now.",
+                  "code": "1C"
+                },
+                "date": "20200910",
+                "time": "023005"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Duties or taxes are due on this package.",
+                  "code": "7F"
+                },
+                "date": "20200910",
+                "time": "022444"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package was released by the customs agency.",
+                  "code": "VK"
+                },
+                "date": "20200909",
+                "time": "231539"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Koeln",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "DE"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200910",
+                "time": "040000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Koeln",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "DE"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200909",
+                "time": "223000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Moscow",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200909",
+                "time": "221000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package is awaiting release from the clearing agency for formal entry at the import location. / Your package was released by the clearing agency.",
+                  "code": "X2"
+                },
+                "date": "20200909",
+                "time": "154309"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Moscow",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200909",
+                "time": "133000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Moscow Area Pervomaiskoe",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200909",
+                "time": "132000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package is awaiting release from the clearing agency for formal entry at the import location.",
+                  "code": "X2"
+                },
+                "date": "20200909",
+                "time": "091448"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": ""
+                  }
+                },
+                "status": {
+                  "type": "X",
+                  "description": "Your package is being processed at the clearance agency.",
+                  "code": "SR"
+                },
+                "date": "20200909",
+                "time": "013244"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "Moscow Area Pervomaiskoe",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Arrived at Facility",
+                  "code": "AR"
+                },
+                "date": "20200909",
+                "time": "044000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "St.Petersburg",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Departed from Facility",
+                  "code": "DP"
+                },
+                "date": "20200908",
+                "time": "193000"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "St.Petersburg",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "I",
+                  "description": "Origin Scan",
+                  "code": "OR"
+                },
+                "date": "20200908",
+                "time": "184835"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "St.Petersburg",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "P",
+                  "description": "Pickup Scan ",
+                  "code": "PU"
+                },
+                "date": "20200908",
+                "time": "125646"
+              },
+              {
+                "location": {
+                  "address": {
+                    "city": "",
+                    "stateProvince": "",
+                    "postalCode": "",
+                    "country": "RU"
+                  }
+                },
+                "status": {
+                  "type": "M",
+                  "description": "Order Processed: Ready for UPS ",
+                  "code": "MP"
+                },
+                "date": "20200908",
+                "time": "210537"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

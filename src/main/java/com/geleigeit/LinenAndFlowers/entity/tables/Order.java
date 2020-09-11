@@ -1,8 +1,7 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import com.geleigeit.LinenAndFlowers.entity.enums.DeliveryService;
-import com.geleigeit.LinenAndFlowers.entity.enums.Shop;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,13 +29,16 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "delivery_service", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "delivery_service_id", nullable = false)
     private DeliveryService deliveryService;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "shop", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
+
+    @Column(name = "tracking_code", unique = true)
+    private String trackingCode;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "customer_id", nullable = false)
@@ -46,26 +48,12 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    private List<Item> items = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+//    private List<Item> items = new ArrayList<>();
 
-    @Column(name = "tracking_code", unique = true)
-    private String trackingCode;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "delivery_status")
-    private String status;
-
-    @Column(name = "status_description")
-    private String description;
-
-    @Column(name = "last_moving_date")
-    private Date lastTrackingDate;
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JsonBackReference(value = "order-orderTracking")
+    private List<OrderTracking> orderTracking = new ArrayList<>();
 
     public Order() {
     }
@@ -150,51 +138,19 @@ public class Order extends AbstractEntity {
         this.address = address;
     }
 
-    public List<Item> getItems() {
-        return items;
+//    public List<Item> getItems() {
+//        return items;
+//    }
+
+//    public void setItems(List<Item> items) {
+//        this.items = items;
+//    }
+
+    public List<OrderTracking> getOrderTracking() {
+        return orderTracking;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getLastTrackingDate() {
-        return lastTrackingDate;
-    }
-
-    public void setLastTrackingDate(Date lastTrackingDate) {
-        this.lastTrackingDate = lastTrackingDate;
+    public void setOrderTracking(List<OrderTracking> orderTracking) {
+        this.orderTracking = orderTracking;
     }
 }

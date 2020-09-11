@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "order_statuses")
-public class OrderStatus {
+@Table(name = "shops")
+public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "status", nullable = false, unique = true)
-    private String status;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
-    @OneToMany(mappedBy = "orderStatus", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JsonBackReference(value = "orderStatus-order")
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference(value = "shop-order")
     private List<Order> orders = new ArrayList<>();
 
-    public OrderStatus() {
+    public Shop() {
     }
 
     public long getId() {
@@ -32,12 +32,12 @@ public class OrderStatus {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Order> getOrders() {

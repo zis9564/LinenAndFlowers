@@ -5,29 +5,27 @@ import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class OrderStatusService {
 
-    private OrderStatusRepository orderStatusRepository;
+    private final OrderStatusRepository orderStatusRepository;
 
     @Autowired
     public OrderStatusService(OrderStatusRepository orderStatusRepository) {
         this.orderStatusRepository = orderStatusRepository;
     }
 
-    public OrderStatus getOne(long id) {
-        OrderStatus orderStatus = orderStatusRepository.findById(id).orElseThrow(NotFoundException::new);
-        return orderStatus;
+    @Transactional
+    public long findByStatusGetId(String status) {
+       return orderStatusRepository.findByStatus(status).getId();
     }
 
-    public OrderStatus getOneByStatus(String status) {
-       return orderStatusRepository.findByStatus(status);
-    }
-
-    public List<OrderStatus> orderStatusList() {
-        return (List<OrderStatus>) orderStatusRepository.findAll();
+    @Transactional
+    public OrderStatus getOrderStatusByName(String status) {
+        return  orderStatusRepository.findByStatus(status);
     }
 }

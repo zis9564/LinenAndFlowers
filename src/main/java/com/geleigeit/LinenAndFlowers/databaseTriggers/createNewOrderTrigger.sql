@@ -1,4 +1,4 @@
-CREATE or REPLACE FUNCTION default_status(bigint) RETURNS VOID AS $$
+CREATE or REPLACE FUNCTION set_first_status(bigint) RETURNS VOID AS $$
 BEGIN
     UPDATE public.orders SET order_status_id = public.order_statuses.id
     FROM public.order_statuses
@@ -8,8 +8,8 @@ $$ LANGUAGE plpgsql;
 
 CREATE or REPLACE FUNCTION first_status_function() RETURNS TRIGGER AS $$
 BEGIN
-    IF (new.order_status_id IS NULL) THEN
-        PERFORM default_status(new.id);
+    IF (new.order_status_id IS NULL OR new.order_status_id != 1) THEN
+        PERFORM set_first_status(new.id);
         RETURN new;
     ELSE
         RETURN old;
