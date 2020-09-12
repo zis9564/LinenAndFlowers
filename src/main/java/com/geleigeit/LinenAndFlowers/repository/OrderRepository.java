@@ -10,15 +10,12 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends CommonRepository<Order> {
 
-//    @Query(value = "SELECT o FROM Order o WHERE o.orderStatus = :status")
-//    List<Order> findAllByOrderStatus(@Param("status") long status);
-//
-//    @Query(value = "SELECT o FROM Order o WHERE o.trackingCode IS NOT NULL " +
-//            "AND o.orderStatus = :status " +
-//            "AND o.deliveryService = :deliveryService")
-//    List <Order> findAllByOrderStatusAndDeliveryServiceWhereTrackingCodeIsNotNull(@Param("status") long status,
-//                                                              @Param("deliveryService") long deliveryService);
+    @Query(value = "SELECT o FROM Order o WHERE o.orderStatus = :status")
+    List<Order> findAllByOrderStatus(@Param("status") long status);
 
     List<Order> findAllByOrderStatusIdAndDeliveryServiceId(long statusId, long deliveryServiceId);
 
+    Order findByOrderStatusIdAndDeliveryServiceIdAndId(long statusId, long deliveryServiceId, long id);
+
+    List<Order> findAllByOrderStatusId(long id);
 }
