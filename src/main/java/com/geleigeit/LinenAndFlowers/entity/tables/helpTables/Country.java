@@ -1,19 +1,20 @@
-package com.geleigeit.LinenAndFlowers.entity.tables;
+package com.geleigeit.LinenAndFlowers.entity.tables.helpTables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
+import com.geleigeit.LinenAndFlowers.entity.tables.Address;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "countries")
-public class Country implements Serializable {
+public class Country extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Column(name = "alpha_2", nullable = false, unique = true)
     private String countryCode2;
@@ -23,18 +24,18 @@ public class Country implements Serializable {
 
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JsonBackReference(value = "country-address")
-    private List<Address> addresses = new ArrayList<>();
+    private Set<Address> addresses = new HashSet<>();
 
     public Country() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getCountryCode2() {
         return countryCode2;
@@ -52,11 +53,11 @@ public class Country implements Serializable {
         this.country = country;
     }
 
-    public List<Address> getAddresses() {
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 }

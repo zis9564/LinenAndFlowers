@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.security;
 
-import com.geleigeit.LinenAndFlowers.entity.tables.User;
+import com.geleigeit.LinenAndFlowers.entity.tables.helpTables.User;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

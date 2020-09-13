@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
-import com.geleigeit.LinenAndFlowers.entity.tables.FabricCount;
+import com.geleigeit.LinenAndFlowers.entity.tables.helpTables.FabricCount;
 import com.geleigeit.LinenAndFlowers.repository.FabricCountRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

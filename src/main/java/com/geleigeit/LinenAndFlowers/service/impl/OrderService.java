@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderService extends AbstractService<Order, OrderRepository> {
@@ -37,7 +37,7 @@ public class OrderService extends AbstractService<Order, OrderRepository> {
     }
 
     @Transactional
-    public List<Order> getAllByOrderStatusIdAndDeliveryServiceId(long orderStatusId, long deliveryServiceId) {
+    public Set<Order> getAllByOrderStatusIdAndDeliveryServiceId(long orderStatusId, long deliveryServiceId) {
         return repository.findAllByOrderStatusIdAndDeliveryServiceId(orderStatusId, deliveryServiceId);
     }
 
@@ -47,7 +47,7 @@ public class OrderService extends AbstractService<Order, OrderRepository> {
     }
 
     @Transactional
-    public List<Order> getAllOrdersByStatus(long id) {
+    public Set<Order> getAllOrdersByStatus(long id) {
         return repository.findAllByOrderStatusId(id);
     }
 
@@ -71,7 +71,7 @@ public class OrderService extends AbstractService<Order, OrderRepository> {
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         try {
-            List<Order> orders = repository.findAllByOrderStatusId(currentOrderStatus);
+            Set<Order> orders = repository.findAllByOrderStatusId(currentOrderStatus);
             for(Order order : orders) {
                 //convert difference between creation time and current time from milliseconds to days
                 int diff = (int) ((new Date().getTime() - order.getCreatedDate().getTime()) / (24 * 60 * 60 * 100));

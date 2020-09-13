@@ -14,7 +14,11 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "createdBy", "modifiedBy", "createdDate", "lastModified"})
-public abstract class AbstractEntity implements Serializable {
+public abstract class AbstractEntity extends BaseEntity implements Serializable {
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
@@ -34,6 +38,14 @@ public abstract class AbstractEntity implements Serializable {
 
     public AbstractEntity() {
     }
+
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getCreatedBy() {
         return createdBy;

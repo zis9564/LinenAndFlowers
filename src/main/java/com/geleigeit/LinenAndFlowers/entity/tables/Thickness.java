@@ -6,16 +6,16 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "thickness")
 public class Thickness extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @NotNull
     @Range(min=80, max=350)
@@ -24,31 +24,31 @@ public class Thickness extends AbstractEntity {
 
     @OneToMany(mappedBy = "thickness", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JsonBackReference(value = "thickness-fabric")
-    private List<Fabric> fabrics = new ArrayList<>();
+    private Set<Fabric> fabrics = new HashSet<>();
 
     public Thickness() {}
 
-    public long getId() {
-        return id;
-    }
+//    public long getId() {
+//        return id;
+//    }
 
     public int getThickness() {
         return thickness;
     }
 
-    public List<Fabric> getFabrics() {
+    public Set<Fabric> getFabrics() {
         return fabrics;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public void setThickness(int thickness) {
         this.thickness = thickness;
     }
 
-    public void setFabrics(List<Fabric> fabrics) {
+    public void setFabrics(Set<Fabric> fabrics) {
         this.fabrics = fabrics;
     }
 }

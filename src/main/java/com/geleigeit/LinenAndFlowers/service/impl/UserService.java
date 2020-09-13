@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
-import com.geleigeit.LinenAndFlowers.entity.tables.User;
+import com.geleigeit.LinenAndFlowers.entity.tables.helpTables.User;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

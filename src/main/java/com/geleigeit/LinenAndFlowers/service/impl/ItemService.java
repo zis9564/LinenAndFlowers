@@ -27,6 +27,9 @@ public class ItemService extends AbstractService<Item, ItemRepository> {
     @Override
     public void addOne(Item item) {
         try {
+            if(repository.existsById(item.getId())) {
+                throw new NullPointerException();
+            }
             repository.save(fabricLengthCalculator.calculateFabricLength(item));
         } catch (NegativeValueException e) {
             throw new ResponseStatusException(

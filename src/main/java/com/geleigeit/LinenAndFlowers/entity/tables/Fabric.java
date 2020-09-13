@@ -5,16 +5,16 @@ import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "fabrics")
 public class Fabric extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Min(1)
     @Column(name = "length", nullable = false)
@@ -34,14 +34,14 @@ public class Fabric extends AbstractEntity {
 
     @OneToMany(mappedBy = "fabric", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JsonBackReference(value = "fabric-item")
-    private List<Item> items = new ArrayList<>();
+    private Set<Item> items = new HashSet<>();
 
     public Fabric() {
     }
 
-    public long getId() {
-        return id;
-    }
+//    public long getId() {
+//        return id;
+//    }
 
     public int getLength() {
         return length;
@@ -59,13 +59,13 @@ public class Fabric extends AbstractEntity {
         return thickness;
     }
 
-    public List<Item> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public void setLength(int length) {
         this.length = length;
@@ -83,7 +83,7 @@ public class Fabric extends AbstractEntity {
         this.thickness = thickness;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 }

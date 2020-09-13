@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class FabricService extends AbstractService<Fabric, FabricRepository> {
@@ -18,7 +18,7 @@ public class FabricService extends AbstractService<Fabric, FabricRepository> {
     }
 
     @Transactional
-    public List<Fabric> getAllFabricsWithSmallLength() {
+    public Set<Fabric> getAllFabricsWithSmallLength() {
         return repository.findFabricByLength();
     }
 }

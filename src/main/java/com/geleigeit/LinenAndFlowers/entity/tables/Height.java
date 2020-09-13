@@ -1,19 +1,20 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "heights")
-public class Height {
+public class Height extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Column(name = "height", nullable = false, unique = true)
     private String height;
@@ -21,18 +22,18 @@ public class Height {
     @OneToMany(mappedBy = "height", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @NotEmpty
     @JsonBackReference(value = "height-item")
-    private List<Item> items = new ArrayList<>();
+    private Set<Item> items = new HashSet<>();
 
     public Height() {
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getHeight() {
         return height;
@@ -42,11 +43,11 @@ public class Height {
         this.height = height;
     }
 
-    public List<Item> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 }

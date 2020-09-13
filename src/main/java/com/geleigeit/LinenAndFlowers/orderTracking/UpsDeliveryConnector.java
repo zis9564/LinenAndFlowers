@@ -21,12 +21,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class UpsDeliveryConnector implements Trackable {
@@ -48,11 +49,12 @@ public class UpsDeliveryConnector implements Trackable {
         this.userService = userService;
     }
 
+    @Transactional
     @Scheduled(cron = "0 0 11,18 * * *")
     public void getAllByDeliveryService() {
 
         long scheduleId = 2;
-        List<Order> orders = orderService.getAllByOrderStatusIdAndDeliveryServiceId(inDeliveryStatus, deliveryServiceId);
+        Set<Order> orders = orderService.getAllByOrderStatusIdAndDeliveryServiceId(inDeliveryStatus, deliveryServiceId);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(SecurityUser.fromUser(
                 userService.getUser(scheduleId)), Role.ADMIN);
@@ -67,6 +69,7 @@ public class UpsDeliveryConnector implements Trackable {
         }
     }
 
+    @Transactional
     public Order getOneByOrderId(long id) {
 
         Order order = orderService.getOneByOrderStatusIdAndDeliveryServiceIdAndId(inDeliveryStatus, deliveryServiceId, id);

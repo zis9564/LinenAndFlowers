@@ -1,13 +1,13 @@
 package com.geleigeit.LinenAndFlowers.controller;
 
-import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Set;
 
-public interface CommonController<E extends AbstractEntity> {
+public interface CommonController<E extends BaseEntity> {
 
     @RequestMapping(value = "/{id:.+}", method = RequestMethod.GET)
     @Transactional
@@ -27,5 +27,5 @@ public interface CommonController<E extends AbstractEntity> {
 
     @GetMapping
     @Transactional
-    List<E> getAll();
+    Set<E> getAll();
 }

@@ -1,7 +1,8 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
+
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,11 +10,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "order_tracking_details")
-public class OrderTracking {
+public class OrderTracking extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Size(min = 11, max = 14)
     @NotBlank
@@ -35,7 +36,7 @@ public class OrderTracking {
     @Column(name = "current_city", updatable = false)
     private String currentCity;
 
-//    @NotNull
+    @NotNull
     @Column(name = "date", nullable = false, updatable = false)
     private Date date;
 
@@ -46,13 +47,13 @@ public class OrderTracking {
     public OrderTracking() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getTrackingCode() {
         return trackingCode;
@@ -100,18 +101,5 @@ public class OrderTracking {
 
     public void setOrder(Order order) {
         this.order = order;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderTracking{" +
-                "id=" + id +
-                ", trackingCode='" + trackingCode + '\'' +
-                ", description='" + description + '\'' +
-                ", currentCountry='" + currentCountry + '\'' +
-                ", currentCity='" + currentCity + '\'' +
-                ", date=" + date +
-                ", order=" + order +
-                '}';
     }
 }

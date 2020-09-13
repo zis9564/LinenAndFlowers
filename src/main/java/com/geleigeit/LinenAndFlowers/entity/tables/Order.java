@@ -4,17 +4,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "orders")
 public class Order extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Column(name = "departure_date")
     private Date departureDate;
@@ -48,27 +46,26 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JsonBackReference(value = "order-orderTracking")
+    private Set<OrderTracking> orderTracking = new HashSet<>();
+    public Order() {
+    }
+
     @ManyToMany
     @JoinTable(
             name = "items_orders",
             joinColumns = {@JoinColumn(name = "order_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "item_id", nullable = false)})
-    private List<Item> items = new ArrayList<>();
+    private Set<Item> items = new HashSet<>();
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JsonBackReference(value = "order-orderTracking")
-    private List<OrderTracking> orderTracking = new ArrayList<>();
-
-    public Order() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public Date getDepartureDate() {
         return departureDate;
@@ -84,14 +81,6 @@ public class Order extends AbstractEntity {
 
     public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
-    }
-
-    public String getTrackingCode() {
-        return trackingCode;
-    }
-
-    public void setTrackingCode(String trackingCode) {
-        this.trackingCode = trackingCode;
     }
 
     public Date getDeadline() {
@@ -126,6 +115,14 @@ public class Order extends AbstractEntity {
         this.shop = shop;
     }
 
+    public String getTrackingCode() {
+        return trackingCode;
+    }
+
+    public void setTrackingCode(String trackingCode) {
+        this.trackingCode = trackingCode;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -142,19 +139,19 @@ public class Order extends AbstractEntity {
         this.address = address;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public List<OrderTracking> getOrderTracking() {
+    public Set<OrderTracking> getOrderTracking() {
         return orderTracking;
     }
 
-    public void setOrderTracking(List<OrderTracking> orderTracking) {
+    public void setOrderTracking(Set<OrderTracking> orderTracking) {
         this.orderTracking = orderTracking;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 }

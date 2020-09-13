@@ -1,10 +1,10 @@
 package com.geleigeit.LinenAndFlowers.validator;
 
-import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
+import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public abstract class AbstractValidator<E extends AbstractEntity> implements Validator {
+public abstract class AbstractValidator<E extends BaseEntity> implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -1,6 +1,6 @@
 package com.geleigeit.LinenAndFlowers.security;
 
-import com.geleigeit.LinenAndFlowers.entity.tables.User;
+import com.geleigeit.LinenAndFlowers.entity.tables.helpTables.User;
 import com.geleigeit.LinenAndFlowers.entity.enums.Status;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

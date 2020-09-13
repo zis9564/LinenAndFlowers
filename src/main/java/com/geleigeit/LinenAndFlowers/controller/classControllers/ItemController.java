@@ -4,6 +4,7 @@ import com.geleigeit.LinenAndFlowers.controller.AbstractController;
 import com.geleigeit.LinenAndFlowers.entity.tables.Item;
 import com.geleigeit.LinenAndFlowers.service.impl.ItemService;
 import com.geleigeit.LinenAndFlowers.validator.classValidators.ItemValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/item")
 public class ItemController extends AbstractController<Item, ItemService, ItemValidator> {
 
+    @Autowired
     protected ItemController(ItemService service, ItemValidator validator) {
         super(service, validator);
     }
-
-
 }

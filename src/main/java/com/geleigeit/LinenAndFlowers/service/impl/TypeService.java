@@ -5,11 +5,13 @@ import com.geleigeit.LinenAndFlowers.repository.TypeRepository;
 import com.geleigeit.LinenAndFlowers.service.AbstractService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TypeService extends AbstractService<Type, TypeRepository> {
 
+    @Autowired
     public TypeService(TypeRepository typeRepository) {
         super(typeRepository);
     }
