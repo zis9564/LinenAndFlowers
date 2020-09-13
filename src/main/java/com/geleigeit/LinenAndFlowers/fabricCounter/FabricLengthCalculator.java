@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.calculator;
+package com.geleigeit.LinenAndFlowers.fabricCounter;
 
 import com.geleigeit.LinenAndFlowers.entity.tables.Fabric;
 import com.geleigeit.LinenAndFlowers.entity.tables.Item;

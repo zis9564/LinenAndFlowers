@@ -18,9 +18,6 @@ public class Country implements Serializable {
     @Column(name = "alpha_2", nullable = false, unique = true)
     private String countryCode2;
 
-    @Column(name = "alpha_3_code", nullable = false, unique = true)
-    private String getCountryCode3;
-
     @Column(name = "country", nullable = false, unique = true)
     private String country;
 
@@ -45,14 +42,6 @@ public class Country implements Serializable {
 
     public void setCountryCode2(String countryCode2) {
         this.countryCode2 = countryCode2;
-    }
-
-    public String getGetCountryCode3() {
-        return getCountryCode3;
-    }
-
-    public void setGetCountryCode3(String getCountryCode3) {
-        this.getCountryCode3 = getCountryCode3;
     }
 
     public String getCountry() {

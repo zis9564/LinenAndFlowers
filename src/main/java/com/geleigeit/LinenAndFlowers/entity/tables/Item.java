@@ -1,10 +1,13 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -17,7 +20,6 @@ public class Item extends AbstractEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "size", nullable = false)
-    @Enumerated(EnumType.STRING)
     private Size size;
 
     @NotNull
@@ -34,6 +36,10 @@ public class Item extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
+    @ManyToMany(mappedBy = "items", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JsonBackReference(value = "item-order")
+    private List<Order> orders = new ArrayList<>();
 
     public Item() {
     }
@@ -76,5 +82,18 @@ public class Item extends AbstractEntity {
 
     public void setFabric(Fabric fabric) {
         this.fabric = fabric;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+            order.getItems().add(this);
     }
 }

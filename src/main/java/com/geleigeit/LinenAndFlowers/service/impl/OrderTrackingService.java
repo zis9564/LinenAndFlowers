@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class OrderTrackingService {
 
     private final OrderTrackingRepository orderTrackingRepository;
-    private final Logger logger = LogManager.getLogger(OrderService.class);
+    private static final Logger logger = LogManager.getLogger(OrderService.class);
 
     @Autowired
     public OrderTrackingService(OrderTrackingRepository orderTrackingRepository) {
@@ -25,25 +23,17 @@ public class OrderTrackingService {
     @Transactional
     public void addOne(OrderTracking orderTracking) {
         orderTrackingRepository.save(orderTracking);
-    }
-
-    @Transactional
-    public void delete(long id) {
-        orderTrackingRepository.deleteById(id);
+        logger.info("new tracking information id {} added", orderTracking.getId());
     }
 
     @Transactional
     public OrderTracking update(OrderTracking newOrderTracking) {
+        logger.info("tracking information id {} updated", newOrderTracking.getId());
         return orderTrackingRepository.save(newOrderTracking);
     }
 
     @Transactional
     public OrderTracking getOne(long id) {
         return orderTrackingRepository.findById(id).orElseThrow(NotFoundException::new);
-    }
-
-    @Transactional
-    public List<OrderTracking> getAllByTrackingCode(String trackingCode) {
-        return orderTrackingRepository.findAllByTrackingCode(trackingCode);
     }
 }

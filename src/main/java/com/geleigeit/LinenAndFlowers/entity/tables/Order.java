@@ -48,8 +48,12 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-//    private List<Item> items = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "items_orders",
+            joinColumns = {@JoinColumn(name = "order_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "item_id", nullable = false)})
+    private List<Item> items = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "order-orderTracking")
@@ -138,13 +142,13 @@ public class Order extends AbstractEntity {
         this.address = address;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
 
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 
     public List<OrderTracking> getOrderTracking() {
         return orderTracking;
