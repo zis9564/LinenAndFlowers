@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -16,6 +19,7 @@ public class Order extends AbstractEntity {
     @Column(name = "arrival_date")
     private Date arrivalDate;
 
+    @NotNull
     @Column(name = "deadline", nullable = false)
     private Date deadline;
 
@@ -23,21 +27,27 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "delivery_service_id", nullable = false)
     private DeliveryService deliveryService;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
+    @Size(min = 11, max = 14)
+    @NotBlank
     @Column(name = "tracking_code", unique = true)
     private String trackingCode;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
@@ -46,6 +56,7 @@ public class Order extends AbstractEntity {
     @JsonBackReference(value = "order-orderTracking")
     private Set<OrderTracking> orderTracking = new HashSet<>();
 
+    @NotNull
     @ManyToMany
     @JoinTable(
             name = "items_orders",
