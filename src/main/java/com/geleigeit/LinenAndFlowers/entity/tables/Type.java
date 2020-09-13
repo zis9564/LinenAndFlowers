@@ -13,10 +13,6 @@ import java.util.Set;
 @Table(name = "types")
 public class Type extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Size(min = 3, max = 32)
     @NotBlank
     @Column(name = "type", unique = true, nullable = false)
@@ -29,10 +25,6 @@ public class Type extends AbstractEntity {
     public Type() {
     }
 
-//    public long getId() {
-//        return id;
-//    }
-
     public String getType() {
         return type;
     }
@@ -40,10 +32,6 @@ public class Type extends AbstractEntity {
     public Set<Fabric> getFabrics() {
         return fabrics;
     }
-
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public void setType(String type) {
         this.type = type;

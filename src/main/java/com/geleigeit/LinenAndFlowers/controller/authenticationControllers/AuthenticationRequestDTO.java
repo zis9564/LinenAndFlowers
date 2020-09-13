@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.controller;
+package com.geleigeit.LinenAndFlowers.controller.authenticationControllers;
 
 public class AuthenticationRequestDTO {
 

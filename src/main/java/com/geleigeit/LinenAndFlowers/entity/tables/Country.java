@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.entity.tables.helpTables;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
@@ -12,10 +12,6 @@ import java.util.Set;
 @Table(name = "countries")
 public class Country extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Column(name = "alpha_2", nullable = false, unique = true)
     private String countryCode2;
 
@@ -28,14 +24,6 @@ public class Country extends BaseEntity {
 
     public Country() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getCountryCode2() {
         return countryCode2;

@@ -11,10 +11,6 @@ import java.util.Set;
 @Table
 public class Size extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Column(name = "size", nullable = false, unique = true)
     private String size;
 
@@ -24,14 +20,6 @@ public class Size extends BaseEntity {
 
     public Size() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getSize() {
         return size;

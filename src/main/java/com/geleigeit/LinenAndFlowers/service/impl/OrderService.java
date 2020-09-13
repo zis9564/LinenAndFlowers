@@ -51,12 +51,6 @@ public class OrderService extends AbstractService<Order, OrderRepository> {
         return repository.findAllByOrderStatusId(id);
     }
 
-    @Override
-    @Transactional
-    public void addOne(Order order) {
-        repository.save(order);
-    }
-
     @Transactional
     @Scheduled(cron = "0 10 08-23 * * *")
     public void SetStatusToInProgress() {

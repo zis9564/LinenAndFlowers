@@ -13,10 +13,6 @@ import java.util.Set;
 @Table(name = "thickness")
 public class Thickness extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @NotNull
     @Range(min=80, max=350)
     @Column(name = "thickness", unique = true, nullable = false)
@@ -28,10 +24,6 @@ public class Thickness extends AbstractEntity {
 
     public Thickness() {}
 
-//    public long getId() {
-//        return id;
-//    }
-
     public int getThickness() {
         return thickness;
     }
@@ -39,10 +31,6 @@ public class Thickness extends AbstractEntity {
     public Set<Fabric> getFabrics() {
         return fabrics;
     }
-
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public void setThickness(int thickness) {
         this.thickness = thickness;

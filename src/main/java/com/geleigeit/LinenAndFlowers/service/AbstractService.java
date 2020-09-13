@@ -2,7 +2,6 @@ package com.geleigeit.LinenAndFlowers.service;
 
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 import com.geleigeit.LinenAndFlowers.repository.CommonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;

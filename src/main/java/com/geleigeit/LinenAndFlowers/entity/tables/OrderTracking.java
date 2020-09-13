@@ -1,5 +1,8 @@
 package com.geleigeit.LinenAndFlowers.entity.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -10,11 +13,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "order_tracking_details")
+@JsonIgnoreProperties({ "createdBy", "modifiedBy", "createdDate", "lastModified", "order"})
 public class OrderTracking extends BaseEntity {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
 
     @Size(min = 11, max = 14)
     @NotBlank
@@ -46,14 +46,6 @@ public class OrderTracking extends BaseEntity {
 
     public OrderTracking() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getTrackingCode() {
         return trackingCode;

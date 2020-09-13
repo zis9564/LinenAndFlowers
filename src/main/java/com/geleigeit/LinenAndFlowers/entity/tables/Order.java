@@ -10,10 +10,6 @@ import java.util.*;
 @Table(name = "orders")
 public class Order extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Column(name = "departure_date")
     private Date departureDate;
 
@@ -49,8 +45,6 @@ public class Order extends AbstractEntity {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "order-orderTracking")
     private Set<OrderTracking> orderTracking = new HashSet<>();
-    public Order() {
-    }
 
     @ManyToMany
     @JoinTable(
@@ -59,13 +53,8 @@ public class Order extends AbstractEntity {
             inverseJoinColumns = {@JoinColumn(name = "item_id", nullable = false)})
     private Set<Item> items = new HashSet<>();
 
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public Order() {
+    }
 
     public Date getDepartureDate() {
         return departureDate;

@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 public interface OrderStatusRepository extends CommonRepository<OrderStatus> {
 
     OrderStatus findByStatus(String status);
-
-//    OrderStatus findById(long id);
 }

@@ -1,12 +1,12 @@
 package com.geleigeit.LinenAndFlowers.controller.classControllers;
 
-import com.geleigeit.LinenAndFlowers.controller.AbstractController;
+import com.geleigeit.LinenAndFlowers.controller.abstractControllers.AllMethodsAbstractController;
 import com.geleigeit.LinenAndFlowers.entity.tables.Fabric;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.service.impl.FabricService;
-import com.geleigeit.LinenAndFlowers.validator.classValidators.FabricValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +18,14 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("api/fabric")
-public class FabricController extends AbstractController<Fabric, FabricService, FabricValidator> {
+public class FabricController extends AllMethodsAbstractController<Fabric, FabricService> {
 
     private final FabricService fabricService;
-    private final Logger logger = LogManager.getLogger(AbstractController.class);
+    private final Logger logger = LogManager.getLogger(AllMethodsAbstractController.class);
 
-    public FabricController(FabricService service, FabricValidator validator) {
-        super(service, validator);
+    @Autowired
+    protected FabricController(FabricService service) {
+        super(service);
         this.fabricService = service;
     }
 

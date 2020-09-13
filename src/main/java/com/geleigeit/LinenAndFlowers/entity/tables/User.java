@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.entity.tables.helpTables;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 import com.geleigeit.LinenAndFlowers.entity.enums.Role;
@@ -9,10 +9,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -45,14 +41,6 @@ public class User extends BaseEntity {
         this.role = role;
         this.status = status;
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getEmail() {
         return email;

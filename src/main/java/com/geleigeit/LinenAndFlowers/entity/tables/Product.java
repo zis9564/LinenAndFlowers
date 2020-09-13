@@ -13,10 +13,6 @@ import java.util.Set;
 @Table(name = "products")
 public class Product extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Size(min = 3, max = 16)
     @NotBlank
     @Column(name = "name", nullable = false)
@@ -37,14 +33,6 @@ public class Product extends AbstractEntity {
 
     public Product() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;

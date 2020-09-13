@@ -13,10 +13,6 @@ import java.util.Set;
 @Table(name = "items")
 public class Item extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "size", nullable = false)
@@ -43,14 +39,6 @@ public class Item extends AbstractEntity {
 
     public Item() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public Product getProduct() {
         return product;

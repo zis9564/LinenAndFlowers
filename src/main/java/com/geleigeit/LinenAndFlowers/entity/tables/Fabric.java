@@ -12,10 +12,6 @@ import java.util.Set;
 @Table(name = "fabrics")
 public class Fabric extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Min(1)
     @Column(name = "length", nullable = false)
     private int length;
@@ -38,10 +34,6 @@ public class Fabric extends AbstractEntity {
 
     public Fabric() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
 
     public int getLength() {
         return length;

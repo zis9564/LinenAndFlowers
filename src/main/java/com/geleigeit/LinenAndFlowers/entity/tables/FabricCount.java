@@ -1,4 +1,4 @@
-package com.geleigeit.LinenAndFlowers.entity.tables.helpTables;
+package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 
@@ -7,10 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fabric_count")
 public class FabricCount extends BaseEntity {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
 
     @Column(name = "length", nullable = false)
     private int length;
@@ -26,14 +22,6 @@ public class FabricCount extends BaseEntity {
 
     public FabricCount() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public int getLength() {
         return length;

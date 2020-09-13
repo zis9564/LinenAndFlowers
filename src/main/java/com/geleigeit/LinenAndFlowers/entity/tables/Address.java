@@ -2,7 +2,6 @@ package com.geleigeit.LinenAndFlowers.entity.tables;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.geleigeit.LinenAndFlowers.entity.AbstractEntity;
-import com.geleigeit.LinenAndFlowers.entity.tables.helpTables.Country;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -14,10 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name = "address")
 public class Address extends AbstractEntity {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
 
     @Size(min = 3, max = 255)
     @NotBlank
@@ -45,14 +40,6 @@ public class Address extends AbstractEntity {
 
     public Address() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getAddress() {
         return address;

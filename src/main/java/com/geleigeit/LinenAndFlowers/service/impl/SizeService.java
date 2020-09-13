@@ -3,24 +3,21 @@ package com.geleigeit.LinenAndFlowers.service.impl;
 import com.geleigeit.LinenAndFlowers.entity.tables.Size;
 import com.geleigeit.LinenAndFlowers.exception.NotFoundException;
 import com.geleigeit.LinenAndFlowers.repository.SizeRepository;
+import com.geleigeit.LinenAndFlowers.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
-public class SizeService {
-
-    private final SizeRepository sizeRepository;
+public class SizeService extends AbstractService<Size, SizeRepository> {
 
     @Autowired
-    public SizeService(SizeRepository sizeRepository) {
-        this.sizeRepository = sizeRepository;
+    public SizeService(SizeRepository repository) {
+        super(repository);
     }
 
     @Transactional
     public Size getOne(long id){
-        return sizeRepository.findById(id).orElseThrow(NotFoundException::new);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 }

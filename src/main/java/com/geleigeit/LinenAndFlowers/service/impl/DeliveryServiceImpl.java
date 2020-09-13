@@ -1,18 +1,18 @@
 package com.geleigeit.LinenAndFlowers.service.impl;
 
+import com.geleigeit.LinenAndFlowers.entity.tables.DeliveryService;
 import com.geleigeit.LinenAndFlowers.repository.DeliveryServiceRepository;
+import com.geleigeit.LinenAndFlowers.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class DeliveryServiceImpl {
-
-    private final DeliveryServiceRepository repository;
+public class DeliveryServiceImpl extends AbstractService<DeliveryService, DeliveryServiceRepository> {
 
     @Autowired
     public DeliveryServiceImpl(DeliveryServiceRepository repository) {
-        this.repository = repository;
+        super(repository);
     }
 
     @Transactional

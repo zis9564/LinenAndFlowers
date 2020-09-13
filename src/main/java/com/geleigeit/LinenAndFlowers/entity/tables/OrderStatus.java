@@ -11,10 +11,6 @@ import java.util.Set;
 @Table(name = "order_statuses")
 public class OrderStatus extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-
     @Column(name = "status", nullable = false, unique = true)
     private String status;
 
@@ -24,14 +20,6 @@ public class OrderStatus extends BaseEntity {
 
     public OrderStatus() {
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getStatus() {
         return status;

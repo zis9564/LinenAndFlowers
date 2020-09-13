@@ -1,31 +1,22 @@
-package com.geleigeit.LinenAndFlowers.controller;
+package com.geleigeit.LinenAndFlowers.controller.interfaceControllers;
 
 import com.geleigeit.LinenAndFlowers.entity.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
 
-public interface CommonController<E extends BaseEntity> {
+public interface AllMethodsController<E extends BaseEntity> extends GetMethodsController<E> {
 
-    @RequestMapping(value = "/{id:.+}", method = RequestMethod.GET)
     @Transactional
-    E getOne(@PathVariable("id") long id);
-
     @PostMapping
-    @Transactional
     void post(@RequestBody @Valid E e);
 
-    @PutMapping
     @Transactional
+    @PutMapping
     E put(@RequestBody @Valid E e);
 
+    @Transactional
     @RequestMapping(value = "/{id:.+}", method = RequestMethod.DELETE)
-    @Transactional
     void remove(@PathVariable("id") long id);
-
-    @GetMapping
-    @Transactional
-    Set<E> getAll();
 }

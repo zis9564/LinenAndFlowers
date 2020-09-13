@@ -1,7 +1,6 @@
 package com.geleigeit.LinenAndFlowers.controller.classControllers;
 
-import com.geleigeit.LinenAndFlowers.validator.classValidators.ColourValidator;
-import com.geleigeit.LinenAndFlowers.controller.AbstractController;
+import com.geleigeit.LinenAndFlowers.controller.abstractControllers.AllMethodsAbstractController;
 import com.geleigeit.LinenAndFlowers.entity.tables.Colour;
 import com.geleigeit.LinenAndFlowers.service.impl.ColourService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/colour")
-public class ColourController extends AbstractController<Colour, ColourService, ColourValidator> {
+public class ColourController extends AllMethodsAbstractController<Colour, ColourService> {
 
     @Autowired
-    public ColourController(ColourService service, ColourValidator validator) {
-        super(service, validator);
+    protected ColourController(ColourService service) {
+        super(service);
     }
 }
